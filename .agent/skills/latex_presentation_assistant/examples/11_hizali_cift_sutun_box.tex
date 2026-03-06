@@ -1,0 +1,64 @@
+% ===================================================================
+% SKILL: ÇİFT SÜTUNLU HİZALI KUTULAR (SIDE-BY-SIDE BOXES)
+% ===================================================================
+% TANIM:
+% Beamer'da iki sütunlu (columns) tasarımda kutuların üst hizalamasının
+% kayması çok yaygın bir sorundur. Bu şablon, [t] (top align)
+% parametresi ile kutuların kusursuz bir şekilde aynı hizada
+% başlamasını sağlar.
+% 
+% MEKANİZMA:
+% \begin{columns}[t] -> Sütun içeriğini en üstten hizalar.
+% ===================================================================
+
+\begin{frame}{Karşılaştırmalı Analiz (Hizalı Kutular)}
+    
+    % [t] parametresi CRITICAL öneme sahiptir.
+    % Olmazsa içeriğe göre dikeyde ortalanır ve hizalar kayar.
+    \begin{columns}[t] 
+        
+        % SOL SÜTUN
+        \column{0.48\textwidth}
+        \begin{block}{1. Tanımlayıcı İstatistik}
+            % İçerik az olsa bile kutu en üstten başlar.
+            Verilerin özetlenmesi ve betimlenmesidir.
+            \begin{itemize}
+                \item Ortalama
+                \item Medyan
+                \item Mod
+            \end{itemize}
+        \end{block}
+
+        % SAĞ SÜTUN
+        \column{0.48\textwidth}
+        \begin{block}{2. Çıkarımsal İstatistik}
+            % İçerik çok olsa bile sol kutuyla aynı hizada başlar.
+            Örneklem verisinden anakütle hakkında tahminlerde bulunmaktır.
+            \begin{itemize}
+                \item Hipotez Testleri
+                \item Güven Aralıkları
+                \item Regresyon Analizi
+                \item ANOVA
+            \end{itemize}
+        \end{block}
+        
+    \end{columns}
+    
+    \vspace{1em}
+    
+    % FARKLI TÜR KUTULARIN YAN YANA KULLANIMI
+    \begin{columns}[t]
+        
+        \column{0.48\textwidth}
+        \begin{alertblock}{Yanlış Yöntem}
+            Verinin sadece ortalamasına bakarak dağılım hakkında karar vermek yanıltıcıdır.
+        \end{alertblock}
+        
+        \column{0.48\textwidth}
+        \begin{exampleblock}{Doğru Yöntem}
+            Histogram ve Kutu Grafiği (Boxplot) çizerek aykırı değerleri incelemektir.
+        \end{exampleblock}
+        
+    \end{columns}
+
+\end{frame}

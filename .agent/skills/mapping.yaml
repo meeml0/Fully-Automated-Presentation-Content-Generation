@@ -1,0 +1,145 @@
+version: 1
+project: "Olasilik"
+owner_intent: "LaTeX lutbeamer ders sunumlari + PDF kitap parcalama"
+
+rules:
+  always_on_file: ".agent/rules/rules.md"
+  precedence:
+    - "rules.md her zaman skill metninden ustundur."
+    - "Skill ile kural celisirse rules.md uygulanir."
+
+routing:
+  - id: "weekly_deck_scaffold_or_refactor"
+    intent_patterns:
+      - "yeni hafta sunumu olustur"
+      - "hafta X iskeleti kur"
+      - "sunumu standart akisa getir"
+      - "kapak + icindekiler + kapanis duzenle"
+    primary_skill:
+      name: "latex_presentation_assistant"
+      path: ".agent/skills/latex_presentation_assistant/SKILL.md"
+    required_resources:
+      - ".agent/skills/latex_presentation_assistant/examples/01_baslangic_ve_kapak.tex"
+      - ".agent/skills/latex_presentation_assistant/examples/02_sunum_akisi_ve_bolumler.tex"
+      - ".agent/skills/latex_presentation_assistant/examples/03_kapanis_ve_kaynakca.tex"
+    enforce_rules_sections:
+      - "1"
+      - "2"
+      - "3"
+      - "11"
+      - "12"
+      - "14"
+      - "15"
+    output_contract:
+      - "Class lutbeamer(light) korunacak."
+      - "Acilis sirasi: kapak -> maketitle -> icindekiler."
+      - "Kapanis: ozet/kaynaklar/kapanis frame."
+
+  - id: "concept_explanation_plus_question_solution"
+    intent_patterns:
+      - "konu anlatimi ve akabinde soru ekle"
+      - "ilgili yerde soru cozum koy"
+      - "uzunsa soru bir frame cozum bir frame"
+      - "muhendislik baglamli ozgun soru yaz"
+    primary_skill:
+      name: "latex_presentation_assistant"
+      path: ".agent/skills/latex_presentation_assistant/SKILL.md"
+    required_resources:
+      - ".agent/skills/latex_presentation_assistant/examples/10_icerik_boxlari.tex"
+      - ".agent/skills/latex_presentation_assistant/examples/11_hizali_cift_sutun_box.tex"
+    enforce_rules_sections:
+      - "3"
+      - "4"
+      - "5"
+      - "7"
+      - "8"
+      - "13"
+      - "15"
+    output_contract:
+      - "Soru, ilgili konu frame'inin hemen arkasina gelir."
+      - "Kisa soru/cozum tek frame iki kolon olabilir."
+      - "Uzun soru/cozum ayri frame'lere bolunur."
+      - "Cozum sonunda kisa yorum bulunur."
+
+  - id: "bridge_recap_exit_ticket"
+    intent_patterns:
+      - "hafta X'ten ne getiriyoruz slaydi ekle"
+      - "kavram haritasi ekle"
+      - "mini quiz / cikis bileti ekle"
+      - "genel ozet slaytlari olustur"
+    primary_skill:
+      name: "latex_presentation_assistant"
+      path: ".agent/skills/latex_presentation_assistant/SKILL.md"
+    required_resources:
+      - ".agent/skills/latex_presentation_assistant/examples/02_sunum_akisi_ve_bolumler.tex"
+      - ".agent/skills/latex_presentation_assistant/examples/08_interaktif_test.tex"
+    enforce_rules_sections:
+      - "2"
+      - "3"
+      - "6"
+      - "11"
+      - "14"
+      - "15"
+    output_contract:
+      - "Kopru frame'i onceki haftayi baglar."
+      - "Ozet frame'i 3-5 maddeyi gecmez."
+
+  - id: "visual_or_tikz_component"
+    intent_patterns:
+      - "tikz grafik ekle"
+      - "ikonik motivasyon vakasi ekle"
+      - "gorsel destekli frame olustur"
+    primary_skill:
+      name: "latex_presentation_assistant"
+      path: ".agent/skills/latex_presentation_assistant/SKILL.md"
+    required_resources:
+      - ".agent/skills/latex_presentation_assistant/examples/05_ikonik_motivasyon_senaryosu.tex"
+      - ".agent/skills/latex_presentation_assistant/examples/12_tikz_grafik_prensipleri.tex"
+    enforce_rules_sections:
+      - "4"
+      - "10"
+      - "13"
+      - "15"
+    output_contract:
+      - "Gorsel anlatimi destekler, sus amacli olmaz."
+      - "Kolon/genislik kurallari tasma riskini artirmayacak."
+
+  - id: "pdf_book_split"
+    intent_patterns:
+      - "pdf kitabi bol"
+      - "bolumlere gore ayir"
+      - "outline/bookmark ile parcala"
+    primary_skill:
+      name: "pdf_book_processor"
+      path: ".agent/skills/pdf_book_processor/SKILL.md"
+    required_resources:
+      - ".agent/skills/pdf_book_processor/scripts/extract_sections.py"
+    enforce_rules_sections: []
+    output_contract:
+      - "PDF outline/bookmark yapisina gore bolunur."
+      - "Dosya adlari sanitize edilir."
+      - "Varsayilan cikti klasoru: Split_Sections."
+
+overrides:
+  latex_presentation_assistant:
+    apply:
+      - "Rules.md zorunlu, skill rehber metni yardimci."
+      - "Tema degisikligi yok: lutbeamer korunur."
+      - "Bibliography dosya adi references.bib tercih edilir (rules ile uyum)."
+    disable_assumptions:
+      - "Gorsel uretimi icin zorunlu generate_image varsayimi."
+      - "Her kod frame icin otomatik fragile ekleme refleksi."
+  pdf_book_processor:
+    apply:
+      - "Sadece PDF parcalama islerinde kullan."
+      - "LaTeX sunum tasklarinda devreye girmez."
+
+fallback:
+  strategy: "rule_only_manual_edit"
+  when:
+    - "Intent hicbir route ile eslesmiyorsa"
+    - "Skill dosyasi bozuk/erisilemezse"
+  behavior:
+    - "Yalniz rules.md uzerinden karar ver."
+    - "lutbeamer iskeleti ve ders dili korunur."
+

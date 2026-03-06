@@ -1,0 +1,509 @@
+% !TeX program = xelatex
+% !BIB program = biber
+\documentclass[light]{lutbeamer}
+
+\usepackage{pgfpages}
+\usepackage{ragged2e}
+\usepackage{booktabs}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{fontawesome5}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% Beamer için enumerate stilini ayarla
+\setbeamertemplate{enumerate item}{\alph{enumi})}
+
+% ===================================================================
+% METADATA
+% ===================================================================
+\setdepartment{OSTİM TEKNİK ÜNİVERSİTESİ}
+\institute[Yazılım Mühendisliği]{YAZILIM MÜHENDİSLİĞİ BÖLÜMÜ}
+\author{Dr.~Öğretim Üyesi Ufuk ASIL}
+\title{Olasılık ve İstatistik}
+\subtitle{Hafta 1: Bölüm 2 Alıştırmaları (2.73 -- 2.128) -- Detaylı Çözümlü}
+\date{2025--2026 Bahar Dönemi}
+
+\begin{document}
+
+\setbeamertemplate{navigation symbols}{}
+\maketitle{}
+
+\section{Koşullu Olasılık}
+
+% ==================== SORU 2.73 ====================
+\begin{frame}{Soru 2.73: Koşullu Olasılık - Sözlü İfade}
+    $R$: Mahkum silahlı soygun yaptı \\
+    $D$: Mahkum uyuşturucu sattı
+    
+    Aşağıdaki koşullu olasılıkları sözlü olarak ifade ediniz:
+    \begin{enumerate}
+        \item $P(R|D)$
+        \item $P(D'|R)$
+        \item $P(R'|D')$
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Çözüm 2.73: Koşullu Olasılık Tanımları}
+    \color{blue}
+    \textbf{Hatırlatma:} $P(A|B)$ = ``$B$ gerçekleştiğinde $A$'nın olasılığı''
+    
+    \vspace{0.5cm}
+    \textbf{a) $P(R|D)$:}
+    
+    ``Mahkum uyuşturucu sattıysa, silahlı soygun da yapmış olma olasılığı''
+    
+    \vspace{0.5cm}
+    \textbf{b) $P(D'|R)$:}
+    
+    ``Mahkum silahlı soygun yaptıysa, uyuşturucu sat\emph{ma}mış olma olasılığı''
+    
+    \vspace{0.5cm}
+    \textbf{c) $P(R'|D')$:}
+    
+    ``Mahkum uyuşturucu sat\emph{ma}dıysa, silahlı soygun da yap\emph{ma}mış olma olasılığı''
+\end{frame}
+
+% ==================== SORU 2.74 ====================
+\begin{frame}{Soru 2.74: Öğrenci Sınıf Dağılımı}
+    \small
+    Sınıf dağılımı:
+    \begin{itemize}
+        \item 3. Sınıf: 10 öğrenci (3'ü A aldı)
+        \item Son Sınıf: 30 öğrenci (10'u A aldı)
+        \item Yüksek Lisans: 10 öğrenci (5'i A aldı)
+    \end{itemize}
+    
+    Rastgele seçilen A almış bir öğrencinin son sınıf olma olasılığı nedir?
+\end{frame}
+
+\begin{frame}{Çözüm 2.74: Koşullu Olasılık Hesabı}
+    \color{blue}
+    \textbf{Toplam A Alan Öğrenci:} $3 + 10 + 5 = 18$
+    
+    \vspace{0.3cm}
+    \textbf{İstenen:} $P(\text{Son Sınıf} | \text{A aldı})$
+    
+    \vspace{0.3cm}
+    \textbf{Çözüm:}
+    
+    A alan öğrenciler içinde son sınıf olanlar: 10
+    
+    \[ P(\text{Son Sınıf} | \text{A aldı}) = \frac{\text{Son sınıftan A alanlar}}{\text{Toplam A alanlar}} \]
+    
+    \[ = \frac{10}{18} = \frac{5}{9} \approx 0.556 \]
+    
+    \begin{center}
+    \fbox{$P = \frac{5}{9} \approx 0.556$ veya \%55.6}
+    \end{center}
+\end{frame}
+
+% ==================== SORU 2.75 ====================
+\begin{frame}{Soru 2.75: Eğitim ve Cinsiyet Tablosu}
+    200 yetişkin, eğitim seviyesi ve cinsiyete göre sınıflandırılmış:
+    
+    \begin{center}
+    \footnotesize
+    \begin{tabular}{lccc}
+        \toprule
+        Education & Male & Female & Total \\
+        \midrule
+        Elementary & 38 & 45 & 83 \\
+        Secondary  & 28 & 50 & 78 \\
+        College    & 22 & 17 & 39 \\
+        \midrule
+        Total & 88 & 112 & 200 \\
+        \bottomrule
+    \end{tabular}
+    \end{center}
+    
+    \begin{enumerate}
+        \item Lise (Secondary) mezunu olduğu bilinen birinin erkek olma olasılığı?
+        \item Kadın olduğu bilinen birinin üniversite (College) diploması olmama olasılığı?
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Çözüm 2.75: Koşullu Olasılıklar}
+    \color{blue}
+    
+    \textbf{a) $P(\text{Male} | \text{Secondary})$:}
+    
+    Secondary mezunları: 78 kişi (28 Erkek, 50 Kadın)
+    
+    \[ P(\text{Male} | \text{Secondary}) = \frac{28}{78} = \frac{14}{39} \approx 0.359 \]
+    
+    \vspace{0.5cm}
+    \textbf{b) $P(\text{No College} | \text{Female})$:}
+    
+    Kadınlar: 112 kişi
+    
+    College olmayanlar (Elementary + Secondary): $45 + 50 = 95$
+    
+    \[ P(\text{No College} | \text{Female}) = \frac{95}{112} \approx 0.848 \]
+    
+    \begin{center}
+    \fbox{\textbf{Sonuç:} a) $\frac{14}{39} = 0.359$, \quad b) $\frac{95}{112} = 0.848$}
+    \end{center}
+\end{frame}
+
+% ==================== SORU 2.76 ====================
+\begin{frame}{Soru 2.76: Hipertansiyon ve Sigara}
+    180 kişilik çalışmada hipertansiyon (H) ve sigara kullanımı ilişkisi:
+    
+    \begin{center}
+    \footnotesize
+    \begin{tabular}{lcccc}
+        \toprule
+         & Nonsmokers & Moderate & Heavy & Total \\
+        \midrule
+        H  & 21 & 36 & 30 & 87 \\
+        NH & 48 & 26 & 19 & 93 \\
+        \midrule
+        Total & 69 & 62 & 49 & 180 \\
+        \bottomrule
+    \end{tabular}
+    \end{center}
+    
+    \begin{enumerate}
+        \item Ağır sigara içicisi (Heavy Smoker) olduğu biliniyorsa, hipertansiyon olma olasılığı?
+        \item Hipertansiyon olmadığı (NH) biliniyorsa, sigara içmeme (Nonsmoker) olasılığı?
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Çözüm 2.76: Koşullu Sağlık Olasılıkları}
+    \color{blue}
+    
+    \textbf{a) $P(H | \text{Heavy})$:}
+    
+    Heavy Smokers toplam: 49 kişi (30 H, 19 NH)
+    
+    \[ P(H | \text{Heavy}) = \frac{30}{49} \approx 0.612 \]
+    
+    \vspace{0.5cm}
+    \textbf{b) $P(\text{Nonsmoker} | NH)$:}
+    
+    NH (Hipertansiyon olmayan) toplam: 93 kişi
+    
+    Nonsmoker olanlar: 48 kişi
+    
+    \[ P(\text{Nonsmoker} | NH) = \frac{48}{93} = \frac{16}{31} \approx 0.516 \]
+    
+    \begin{center}
+    \fbox{\textbf{Sonuç:} a) $\frac{30}{49} = 0.612$, \quad b) $\frac{16}{31} = 0.516$}
+    \end{center}
+\end{frame}
+
+% ==================== SORU 2.77 ====================
+\begin{frame}{Soru 2.77: Ders Seçimi}
+    \small
+    100 lise son sınıf öğrencisi:
+    \begin{itemize}
+        \item 42 Matematik, 68 Psikoloji, 54 Tarih
+        \item 25 Mat \& Psi, 22 Mat \& Tarih
+        \item 10 Üçü birden (Mat \& Psi \& Tarih)
+        \item 7 sadece Tarih (Mat ve Psi yok)
+        \item 8 hiçbirini almadı
+    \end{itemize}
+    
+    \begin{enumerate}
+        \item Psikoloji alan birinin üç dersi de alma olasılığı?
+        \item Psikoloji almayan birinin hem Tarih hem Mat alma olasılığı?
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Çözüm 2.77: Venn Diyagramı ile Çözüm}
+    \color{blue}
+    \textbf{Güncellenmiş Veriler (Kitap):}
+    \begin{itemize}
+        \item $|M| = 42$, $|P| = 68$, $|T| = 54$
+        \item $|M \cap P| = 25$, $|M \cap T| = 22$
+        \item $|M \cap P \cap T| = 10$ (Üçü birden)
+        \item Sadece T (M ve P yok): 7
+        \item Hiçbiri: 8
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    \textbf{a) $P(\text{Üçü} | P)$:}
+    
+    Psikoloji alanlar içinde üçünü de alanlar:
+    \[ P(M \cap P \cap T | P) = \frac{|M \cap P \cap T|}{|P|} = \frac{10}{68} = \frac{5}{34} \approx 0.147 \]
+    
+    \vspace{0.3cm}
+    \textbf{b) $P(M \cap T | P')$:}
+    
+    Psikoloji almayanlar: $100 - 68 = 32$
+    
+    Mat \& Tarih ama Psi değil: $|M \cap T| - |M \cap P \cap T| = 22 - 10 = 12$
+    
+    \[ P(M \cap T | P') = \frac{12}{32} = \frac{3}{8} = 0.375 \]
+    
+    \begin{center}
+    \fbox{\textbf{Sonuç:} a) $\frac{5}{34} = 0.147$, \quad b) $\frac{3}{8} = 0.375$}
+    \end{center}
+\end{frame}
+
+\section{Bağımsızlık ve Çarpım Kuralı}
+
+% ==================== SORU 2.78 ====================
+\begin{frame}{Soru 2.78: Aşı Üretimi - Bağımsız Denetimler}
+    Aşı üretimi 3 bağımsız departmandan geçiyor:
+    \begin{itemize}
+        \item Departman 1: Ret oranı 0.10
+        \item Departman 2: Ret oranı 0.08
+        \item Departman 3: Ret oranı 0.12
+    \end{itemize}
+    
+    \begin{enumerate}
+        \item İlk denetimden geçip ikincide reddedilme olasılığı?
+        \item Üçüncü bölümde reddedilme olasılığı (öncekilerden geçip)?
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Çözüm 2.78: Bağımsız Olaylar}
+    \color{blue}
+    \textbf{Bağımsızlık:} $P(A \cap B) = P(A) \cdot P(B)$
+    
+    \vspace{0.3cm}
+    \textbf{a) İlk denetimden geçip ikincide ret:}
+    
+    \begin{align*}
+    P(\text{Dep1 Geçer} \cap \text{Dep2 Red}) &= P(\text{Dep1 Geçer}) \times P(\text{Dep2 Red}) \\
+    &= (1 - 0.10) \times 0.08 \\
+    &= 0.90 \times 0.08 \\
+    &= 0.072
+    \end{align*}
+    
+    \vspace{0.3cm}
+    \textbf{b) İlk iki denetimden geçip üçüncüde ret:}
+    
+    \begin{align*}
+    &= P(\text{Dep1 Geçer}) \times P(\text{Dep2 Geçer}) \times P(\text{Dep3 Red}) \\
+    &= 0.90 \times 0.92 \times 0.12 \\
+    &= 0.09936 \approx 0.099
+    \end{align*}
+\end{frame}
+
+% ==================== SORU 2.80 ====================
+\begin{frame}{Soru 2.80: Benzin İstasyonu}
+    Benzin alan araçların:
+    \begin{itemize}
+        \item \%25'i yağ değişimi yaptırıyor
+        \item \%40'ı yağ filtresi değiştiriyor
+        \item \%14'ü her ikisini birden yapıyor
+    \end{itemize}
+    
+    \begin{enumerate}
+        \item Yağ değiştiyse filtre de değişme olasılığı?
+        \item Filtre değiştiyse yağ değişme olasılığı?
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Çözüm 2.80: Koşullu Olasılık}
+    \color{blue}
+    \textbf{Veriler:}
+    \begin{itemize}
+        \item $P(Y) = 0.25$ (Yağ değişimi)
+        \item $P(F) = 0.40$ (Filtre değişimi)
+        \item $P(Y \cap F) = 0.14$ (Her ikisi)
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    \textbf{a) $P(F|Y)$:}
+    \[ P(F|Y) = \frac{P(Y \cap F)}{P(Y)} = \frac{0.14}{0.25} = 0.56 \]
+    
+    \vspace{0.3cm}
+    \textbf{b) $P(Y|F)$:}
+    \[ P(Y|F) = \frac{P(Y \cap F)}{P(F)} = \frac{0.14}{0.40} = 0.35 \]
+    
+    \begin{center}
+    \fbox{a) $P = 0.56$ (56\%), \quad b) $P = 0.35$ (35\%)}
+    \end{center}
+\end{frame}
+
+% ==================== SORU 2.81 ====================
+\begin{frame}{Soru 2.81: TV Şovu İzleme}
+    Bir çift için:
+    \begin{itemize}
+        \item $P(\text{Erkek izler}) = 0.4$
+        \item $P(\text{Kadın izler}) = 0.5$
+        \item Eşi izliyorsa erkeğin izleme olasılığı: $P(E|K) = 0.7$
+    \end{itemize}
+    
+    \begin{enumerate}
+        \item Çiftin birlikte izleme olasılığı?
+        \item Kocası izliyorsa kadının izleme olasılığı?
+        \item En az birinin izleme olasılığı?
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Çözüm 2.81: Çift İzleme Olasılığı}
+    \color{blue}
+    \textbf{a) Birlikte izleme:} $P(E \cap K)$
+    
+    Koşullu olasılık formülünden:
+    \[ P(E \cap K) = P(E|K) \cdot P(K) = 0.7 \times 0.5 = 0.35 \]
+    
+    \vspace{0.3cm}
+    \textbf{b) $P(K|E)$:}
+    \[ P(K|E) = \frac{P(E \cap K)}{P(E)} = \frac{0.35}{0.4} = 0.875 \]
+    
+    \vspace{0.3cm}
+    \textbf{c) En az biri izler:} $P(E \cup K)$
+    \begin{align*}
+    P(E \cup K) &= P(E) + P(K) - P(E \cap K) \\
+    &= 0.4 + 0.5 - 0.35 \\
+    &= 0.55
+    \end{align*}
+\end{frame}
+
+\section{Bayes Teoremi}
+
+% ==================== SORU 2.95 ve 2.97 ====================
+\begin{frame}{Soru 2.95 ve 2.97: Kanser Teşhisi (Bayes)}
+    40 yaş üstü nüfusta:
+    \begin{itemize}
+        \item Kanser olma olasılığı: $P(K) = 0.05$
+        \item Gerçek pozitif (kanserli, test+): $P(T+|K) = 0.78$
+        \item Yanlış pozitif (kansersiz, test+): $P(T+|K') = 0.06$
+    \end{itemize}
+    
+    \textbf{Soru 2.95:} Bir kişiye kanser teşhisi konma olasılığı?
+    
+    \textbf{Soru 2.97:} Teşhis konulan kişinin gerçekten kanser olma olasılığı?
+\end{frame}
+
+\begin{frame}{Çözüm 2.95: Toplam Olasılık Teoremi}
+    \color{blue}
+    \textbf{İstenen:} $P(T+)$ = Test pozitif çıkma olasılığı
+    
+    \vspace{0.3cm}
+    \textbf{Toplam Olasılık Teoremi:}
+    \begin{align*}
+    P(T+) &= P(T+|K) \cdot P(K) + P(T+|K') \cdot P(K') \\
+          &= 0.78 \times 0.05 + 0.06 \times 0.95 \\
+          &= 0.039 + 0.057 \\
+          &= 0.096
+    \end{align*}
+    
+    \begin{center}
+    \fbox{Teşhis konma olasılığı: $P(T+) = 0.096$ veya \%9.6}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Çözüm 2.97: Bayes Teoremi}
+    \color{blue}
+    \textbf{İstenen:} $P(K|T+)$ = Test pozitif çıktıysa gerçekten kanser olma
+    
+    \vspace{0.3cm}
+    \textbf{Bayes Teoremi:}
+    \[ P(K|T+) = \frac{P(T+|K) \cdot P(K)}{P(T+)} \]
+    
+    \vspace{0.3cm}
+    \textbf{Hesaplama:}
+    \begin{align*}
+    P(K|T+) &= \frac{0.78 \times 0.05}{0.096} \\
+            &= \frac{0.039}{0.096} \\
+            &\approx 0.406
+    \end{align*}
+    
+    \begin{center}
+    \fbox{$P(K|T+) \approx 0.406$ veya \%40.6}
+    \end{center}
+    
+    \vspace{0.2cm}
+    \footnotesize
+    \textbf{Not:} Test pozitif çıksa bile kişinin kanserli olma olasılığı sadece \%40.6. Bu, düşük prevalans nedeniyle yanlış pozitiflerin etkisidir.
+\end{frame}
+
+% ==================== SORU 2.102 ====================
+\begin{frame}{Soru 2.102: Monty Hall Problemi}
+    \textbf{Senaryo:}
+    \begin{itemize}
+        \item 3 kapı var, birinde ödül, ikisinde keçi
+        \item Siz A kapısını seçiyorsunuz
+        \item Sunucu (ödülü biliyor) B kapısını açıyor → Keçi çıkıyor
+        \item Size teklif: C'ye geçmek ister misiniz?
+    \end{itemize}
+    
+    \textbf{Soru:} C'ye geçmeli misiniz? Olasılıkla açıklayınız.
+\end{frame}
+
+\begin{frame}{Çözüm 2.102: Monty Hall - Değiştirmek Avantajlı}
+    \color{blue}
+    \textbf{Başlangıç:} A seçtiniz, $P(\text{A'da ödül}) = 1/3$, $P(\text{A'da yok}) = 2/3$
+    
+    \vspace{0.3cm}
+    \textbf{Durum Analizi:}
+    
+    \begin{enumerate}
+        \item Ödül A'daysa (olas. 1/3):
+        \begin{itemize}
+            \item Sunucu B veya C'yi açar (keçi)
+            \item Değiştirirseniz $\rightarrow$ Kaybedersiniz
+        \end{itemize}
+        
+        \item Ödül B'deyse (olas. 1/3):
+        \begin{itemize}
+            \item Sunucu C'yi açar
+            \item C'ye geçerseniz $\rightarrow$ Kazanırsınız
+        \end{itemize}
+        
+        \item Ödül C'deyse (olas. 1/3):
+        \begin{itemize}
+            \item Sunucu B'yi açar
+            \item C'ye geçerseniz $\rightarrow$ Kazanırsınız
+        \end{itemize}
+    \end{enumerate}
+    
+    \vspace{0.3cm}
+    \textbf{Sonuç:} Değiştirirseniz kazanma olasılığı: $1/3 + 1/3 = 2/3$
+    
+    \begin{center}
+    \fbox{\textbf{EVET, C'ye geçmelisiniz! Kazanma şansınız ikiye katlanır.}}
+    \end{center}
+\end{frame}
+
+\section{Genel Tekrar ve Notlar}
+
+\begin{frame}{Soru 2.103 -- 2.128: Özet Bilgi}
+    \small
+    Bölüm sonu tekrar soruları şunları kapsar:
+    
+    \begin{itemize}
+        \item \textbf{2.103:} Doğruluk serumu etkinliği (Bayes)
+        \item \textbf{2.119:} Elektronik bileşen lotları (Koşullu olas.)
+        \item \textbf{2.120:} Nadir hastalık testi (Yanlış pozitif analizi)
+        \item \textbf{2.121:} İki mühendis hata oranları (Bayes)
+        \item \textbf{2.127:} Kraliçe Victoria hemofili taşıyıcısı (Genetik olas.)
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    \textbf{Çözüm Yaklaşımları:}
+    \begin{enumerate}
+        \item Ağaç diyagramı çizin
+        \item Toplam olasılık teoremini kullanın
+        \item Bayes teoremini doğru uygulayın
+        \item Koşullu olasılık formülünü hatırlayın: $P(A|B) = \frac{P(A \cap B)}{P(B)}$
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Bölüm 2 Özeti: Temel Formüller}
+    \color{blue}
+    \textbf{1. Koşullu Olasılık:}
+    \[ P(A|B) = \frac{P(A \cap B)}{P(B)} \]
+    
+    \textbf{2. Çarpım Kuralı:}
+    \[ P(A \cap B) = P(A|B) \cdot P(B) = P(B|A) \cdot P(A) \]
+    
+    \textbf{3. Bağımsızlık:}
+    \[ P(A \cap B) = P(A) \cdot P(B) \]
+    
+    \textbf{4. Toplam Olasılık:}
+    \[ P(A) = \sum_i P(A|B_i) \cdot P(B_i) \]
+    
+    \textbf{5. Bayes Teoremi:}
+    \[ P(B_i|A) = \frac{P(A|B_i) \cdot P(B_i)}{\sum_j P(A|B_j) \cdot P(B_j)} \]
+\end{frame}
+
+\end{document}

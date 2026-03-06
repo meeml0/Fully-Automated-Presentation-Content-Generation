@@ -1,0 +1,33 @@
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.4.19)  6 MAR 2026 21:57
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**"c:/Users/ufuka/Desktop/Olasılık/kitap soruları/1-hafta-alistirmalar-1"
+(c:/Users/ufuka/Desktop/Olasılık/kitap soruları/1-hafta-alistirmalar-1.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-03-26>
+
+! LaTeX Error: File `lutbeamer.cls' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: cls)
+
+Enter file name: 
+c:/Users/ufuka/Desktop/Olasılık/kitap soruları/1-hafta-alistirmalar-1.tex:4: Emergency stop.
+<read *> 
+         
+l.4 ^^M
+       
+*** (cannot \read from terminal in nonstop modes)
+
+ 
+Here is how much of TeX's memory you used:
+ 19 strings out of 470267
+ 541 string characters out of 5488342
+ 415773 words of memory out of 5000000
+ 26749 multiletter control sequences out of 15000+600000
+ 626825 words of font info for 40 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 19i,0n,29p,127b,17s stack positions out of 10000i,1000n,20000p,200000b,200000s
+No pages of output.

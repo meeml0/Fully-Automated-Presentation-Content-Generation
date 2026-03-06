@@ -1,0 +1,91 @@
+% ===================================================================
+% SKILL: İKONİK DERS MOTİVASYON SENARYOSU
+% ===================================================================
+% TANIM:
+% Bu şablon, dersin başında öğrencilerin ilgisini çekmek ve konunun 
+% önemini vurgulamak için kullanılan "Hikaye Tabanlı Motivasyon" 
+% akışını oluşturur.
+% 
+% YAPISI:
+% 1. SORUN/GÖZLEM FRAME'İ: Gerçek hayattan bir vaka sunulur. Sol tarafta 
+%    metin, sağ tarafta bu vakayı temsil eden AI tarafından üretilmiş 
+%    veya stok bir görsel bulunur.
+% 
+% 2. SORU/DÜŞÜNDÜRME FRAME'İ: Öğrenciye "Siz olsanız ne yapardınız?" 
+%    sorusu yöneltilir. Yanlış ama popüler olan sezgisel cevap tartışılır.
+% 
+% 3. ÇÖZÜM/DERS FRAME'İ: Bilimsel/Mühendislik gerçeği açıklanır ve 
+%    dersin ana fikrine bağlanır.
+% 
+% PROMPT İPUCU:
+% Eğer "ikonik örnek" dendiğinde bu şablon tetiklenmeli ve AI'dan 
+% sağ tarafta kullanılmak üzere konuya uygun dikey/kare bir görsel 
+% üretmesi istenmelidir (generate_image tool).
+% ===================================================================
+
+% -------------------------------------------------------------------
+% 1. HİKAYE VE GÖRSEL (PROBLEM TANIMI)
+% -------------------------------------------------------------------
+\begin{frame}{Vaka Analizi: [Vaka Adı Buraya]}
+    \begin{columns}
+        % SOL SÜTUN: Hikaye Metni
+        \column{0.6\textwidth}
+        \justifying{}
+        \textbf{Bağlam/Gözlem:} \\
+        [Olayın geçtiği yer, zaman ve problem durumu buraya yazılır. Örn: II.\ Dünya Savaşı uçakları, Fabrika üretim hataları vb.]
+
+        \vspace{1em}
+        \textbf{Problem:} \\
+        [Çözülmesi gereken mühendislik veya analiz problemi.]
+        
+        \vspace{1em}
+        \textbf{Yanlış Algı (Opsiyonel):} \\
+        [İnsanların ilk başta düşündüğü hatalı çözüm veya sezgi.]
+
+        % SAĞ SÜTUN: İkonik Görsel olucak. Bu görseli sen üreteceksin nano banana ile gemerative ai bir resim üretecek ikonik örneği öğrencilerin gözünde canlanması için bu resim gayet konuyu temsil edebilecek şekilde ve mümkünse ultra realistik bir örnek olmalı animasyon şeklinde değil gerçek insan gerçek elma gibi gerçek unsurlar kullanılmalı. 
+        \column{0.4\textwidth}
+        \centering
+        % Görsel Yönergesi: Dikey veya Kare formatta, konuyu net anlatan,
+        % karmaşadan uzak, "ikonik" bir çizim veya fotoğraf.
+        % Örn: figures/iconic_case_study.png
+        \includegraphics[width=\linewidth, keepaspectratio]{figures/placeholder_image.png} 
+    \end{columns}
+\end{frame}
+
+% -------------------------------------------------------------------
+% 2. TARTIŞMA VE SORU (İNTERAKTİF)
+% -------------------------------------------------------------------
+\begin{frame}{Soru: Siz Olsanız Ne Yapardınız?}
+    \justifying{}
+    Veriler veya durum ortada: [Kısa özet].
+    
+    \vspace{1em}
+    \textbf{Genel Kanı / Yöneticilerin Önerisi:} \\
+    \textit{``[Hatalı ama mantıklı görünen öneri buraya]''}
+
+    \vspace{1em}
+    \textbf{Soru:} \\
+    Siz bir mühendis olsaydınız, bu öneriye katılır mıydınız? Yoksa verilerin arkasındaki [gizli gerçeği] mi arardınız?
+\end{frame}
+
+% -------------------------------------------------------------------
+% 3. ÇÖZÜM VE DERS (BİLİMSEL GERÇEK)
+% -------------------------------------------------------------------
+\begin{frame}{Çözüm: [Bilimsel Yöntem/Kavram Adı]}
+    \justifying{}
+    [Bu problemin bilimsel adını ve çözümünü buraya yazın. Örn: Hayatta Kalma Yanlılığı]
+
+    \vspace{0.5em}
+    \begin{block}{Analiz ve Gerçek}
+        \begin{itemize}
+            \item [Gerçek 1: Verinin görünen yüzü]
+            \item [Gerçek 2: Verinin görünmeyen yüzü (Kayıp veri vb.)]
+            \item [Sonuç: Bilimsel çıkarım]
+        \end{itemize}
+    \end{block}
+
+    \vspace{0.5em}
+    \textbf{Mühendislik Dersi:} [Konunun derse bağlandığı ana fikir cümlesi.]
+    \\ \centering
+    \textit{[Vurucu kapanış cümlesi veya istatistiksel sonuç]}
+\end{frame}

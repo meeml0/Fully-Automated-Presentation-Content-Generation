@@ -1,0 +1,18 @@
+\frametitle{Çözüm 2.1.a: 8 ile Bölünebilen Sayılar}
+\color{blue}
+    \textbf{Soru:} 1 ile 50 arasındaki, 8 ile bölünebilen tamsayılar kümesi.
+
+    \vspace{0.3cm}
+    \textbf{Çözüm Adımları:}
+    \begin{enumerate}
+        \item 8'in katlarını bulmak için: $8 \times 1 = 8$, $8 \times 2 = 16$, \dots
+        \item 50'yi geçmeyen en büyük kat: $8 \times 6 = 48$
+        \item $8 \times 7 = 56 > 50$ (Dahil değil)
+    \end{enumerate}
+
+    \vspace{0.3cm}
+    \begin{center}
+    \fbox{$S = \{8, 16, 24, 32, 40, 48\}$}
+    \end{center}
+
+    \textbf{Kontrol:} 6 eleman var. Her biri 8'in katı ve 50'den küçük.

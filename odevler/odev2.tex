@@ -1,0 +1,430 @@
+﻿% !TeX program = xelatex
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{fontspec}
+\usepackage[turkish]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[skins,breakable]{tcolorbox}
+\usepackage{tikz}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\graphicspath{{ocr_assets/markers/}{odevler/ocr_assets/markers/}}
+\setlength{\headheight}{24pt}
+\setmainfont{Latin Modern Roman}
+
+\geometry{left=12mm, right=12mm, top=2.5cm, bottom=2.5cm}
+
+% ── OCR Köşe (L) İşaretleri ──────────────────────────────────────
+\newcommand{\ocrMarkerInset}{12mm}
+\newcommand{\ocrMarkerSize}{14mm}
+\newcommand{\ocrCornerLen}{12mm}
+\newcommand{\ocrPageTopShift}{-0.5cm}
+\newcommand{\ocrMainBoxHeight}{24.2cm}
+\newcommand{\ocrSplitGap}{0.15cm}
+
+% OCR reference anchors (printer-safe inset + ArUco fiducials)
+\fancypagestyle{ocrpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    \fancyhead[L]{}
+    \fancyhead[R]{}
+    \fancyfoot[C]{\textbf{\sffamily Sayfa \thepage}}
+    \fancyhead[C]{%
+        \begin{tikzpicture}[remember picture,overlay]
+            \draw[line width=2.2pt] (current page.north west) ++(\ocrMarkerInset,-\ocrMarkerInset) -- ++(\ocrCornerLen,0);
+            \draw[line width=2.2pt] (current page.north west) ++(\ocrMarkerInset,-\ocrMarkerInset) -- ++(0,-\ocrCornerLen);
+            \draw[line width=2.2pt] (current page.north east) ++(-\ocrMarkerInset,-\ocrMarkerInset) -- ++(-\ocrCornerLen,0);
+            \draw[line width=2.2pt] (current page.north east) ++(-\ocrMarkerInset,-\ocrMarkerInset) -- ++(0,-\ocrCornerLen);
+            \draw[line width=2.2pt] (current page.south west) ++(\ocrMarkerInset,\ocrMarkerInset) -- ++(\ocrCornerLen,0);
+            \draw[line width=2.2pt] (current page.south west) ++(\ocrMarkerInset,\ocrMarkerInset) -- ++(0,\ocrCornerLen);
+            \draw[line width=2.2pt] (current page.south east) ++(-\ocrMarkerInset,\ocrMarkerInset) -- ++(-\ocrCornerLen,0);
+            \draw[line width=2.2pt] (current page.south east) ++(-\ocrMarkerInset,\ocrMarkerInset) -- ++(0,\ocrCornerLen);
+
+            \node[anchor=north west,inner sep=0pt,xshift=\ocrMarkerInset,yshift=-\ocrMarkerInset] at (current page.north west)
+                {\includegraphics[width=\ocrMarkerSize]{aruco_00.png}};
+            \node[anchor=north east,inner sep=0pt,xshift=-\ocrMarkerInset,yshift=-\ocrMarkerInset] at (current page.north east)
+                {\includegraphics[width=\ocrMarkerSize]{aruco_01.png}};
+            \node[anchor=south east,inner sep=0pt,xshift=-\ocrMarkerInset,yshift=\ocrMarkerInset] at (current page.south east)
+                {\includegraphics[width=\ocrMarkerSize]{aruco_02.png}};
+            \node[anchor=south west,inner sep=0pt,xshift=\ocrMarkerInset,yshift=\ocrMarkerInset] at (current page.south west)
+                {\includegraphics[width=\ocrMarkerSize]{aruco_03.png}};
+
+            \node[anchor=north west,inner sep=0pt,xshift=38mm,yshift=-18mm] at (current page.north west)
+                {\textbf{\sffamily MAT204 ODEV2}};
+            \node[anchor=north east,inner sep=0pt,xshift=-38mm,yshift=-18mm] at (current page.north east)
+                {\textbf{\sffamily OGRENCI NO: \underline{\hspace{3cm}}}};
+        \end{tikzpicture}%
+    }
+}
+% ── OCR Kutu Stilleri ────────────────────────────────────────────
+\makeatletter
+\tcbset{
+    ocrbox/.style={
+        enhanced,
+        colback=white,
+        colframe=black,
+        boxrule=1.5pt,
+        arc=0pt,
+        outer arc=0pt,
+        left=2mm, right=2mm, top=4mm, bottom=2mm,
+        fonttitle=\bfseries\large,
+        coltitle=black,
+        attach boxed title to top left={yshift=3mm, xshift=0mm},
+        boxed title style={empty, size=minimal, bottom=0pt, top=0pt, left=0pt, right=0pt},
+        after skip=12pt,
+        underlay={
+            \begin{tcbclipinterior}
+                \draw[gray!40, thin, dashed, ystep=1cm, xstep=20cm] (interior.south west) grid (interior.north east);
+            \end{tcbclipinterior}
+        }
+    },
+    ocrboxsplit/.style={
+        sidebyside,
+        sidebyside align=top seam,
+        sidebyside gap=4mm,
+        lefthand ratio=0.44,
+        segmentation style={solid, black, line width=1.5pt},
+        enhanced,
+        colback=white,
+        colframe=black,
+        boxrule=1.5pt,
+        arc=0pt,
+        outer arc=0pt,
+        left=2mm, right=2mm, top=4mm, bottom=2mm,
+        fonttitle=\bfseries\large,
+        coltitle=black,
+        attach boxed title to top left={yshift=3mm, xshift=0mm},
+        boxed title style={empty, size=minimal, bottom=0pt, top=0pt, left=0pt, right=0pt},
+        after skip=12pt,
+        underlay={
+            \begin{tcbclipinterior}
+                \iftcb@sidebyside
+                    \clip (segmentation.south) rectangle (interior.north east);
+                \else
+                    \clip (interior.south west) rectangle (segmentation.east);
+                \fi
+                \draw[gray!40, thin, dashed, ystep=1cm, xstep=20cm] (interior.south west) grid (interior.north east);
+            \end{tcbclipinterior}
+        }
+    },
+    ocrresultbox/.style={
+        enhanced,
+        nobeforeafter,
+        colback=white,
+        colframe=black,
+        boxrule=1pt,
+        arc=0pt,
+        left=1mm, right=1mm, top=1mm, bottom=1mm,
+        height=1.5cm,
+        width=0.25\textwidth,
+        fonttitle=\bfseries\sffamily\small,
+        coltitle=black
+    }
+}
+\makeatother
+
+\newcommand{\ocrTopSectionLabel}[1]{%
+    \vspace*{-0.2cm}%
+    \noindent\textbf{\sffamily #1}\\[-1cm]%
+}
+
+\newcommand{\ocrInnerSectionLabel}[1]{%
+    \vspace*{-0.4cm}%
+    \noindent\textbf{\sffamily #1}\\[0.2cm]%
+}
+
+\newcommand{\ocrTopResultBox}[1]{%
+    \par\noindent\hfill%
+    \begin{minipage}{0.25\textwidth}%
+    \begin{tcolorbox}[enhanced, nobeforeafter, colback=white, colframe=black, boxrule=1pt, arc=0pt,%
+        left=1mm, right=1mm, top=1mm, bottom=1mm, height=1.5cm, width=\linewidth,%
+        title={#1:}, fonttitle=\bfseries\sffamily\small, coltitle=black, colbacktitle=white]%
+    \end{tcolorbox}%
+    \end{minipage}%
+}
+
+\newcommand{\ocrInnerResultBox}[1]{%
+    \par\noindent\hfill%
+    \begin{minipage}{0.25\textwidth}%
+    \begin{tcolorbox}[enhanced, nobeforeafter, colback=white, colframe=black, boxrule=1pt, arc=0pt,%
+        left=1mm, right=1mm, top=2mm, bottom=1mm, height=1.5cm, width=\linewidth,%
+        title={#1:}, fonttitle=\bfseries\sffamily\small, coltitle=black, colbacktitle=white]%
+    \end{tcolorbox}%
+    \end{minipage}%
+}
+
+\newcommand{\ocrDivider}{%
+    \vspace{\ocrSplitGap}%
+    \noindent\rule{\linewidth}{1.2pt}%
+    \vspace{\ocrSplitGap}%
+}
+
+\definecolor{TitleColor}{HTML}{0B3C5D}
+\definecolor{QuestionColor}{HTML}{0D3B66}
+\definecolor{ChoiceColor}{HTML}{8A2D12}
+
+\renewcommand{\labelenumi}{\textbf{\color{QuestionColor}\arabic{enumi}.}}
+\renewcommand{\labelenumii}{\textbf{\color{ChoiceColor}(\alph{enumii})}}
+
+\setlist[enumerate,1]{leftmargin=*,font=\bfseries\color{QuestionColor}}
+\setlist[enumerate,2]{leftmargin=1.2cm,font=\bfseries\color{ChoiceColor}}
+\setlist[itemize]{leftmargin=1.2cm,font=\bfseries\color{ChoiceColor},label=\textbf{\color{ChoiceColor}$\blacktriangleright$}}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+
+    
+    {\Huge \textbf{\color{TitleColor}Mühendisler için Olasılık ve İstatistik MAT204}}\\[0.5cm]
+    
+    {\Large \textbf{ÖDEV - 2}}\\[1cm]
+    
+    \colorbox{yellow}{\large \textbf{TESLİM TARİHİ:} 10.03.2026 -- 20.03.2026}\\[1cm]
+\end{center}
+    
+\noindent\colorbox{yellow!30}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+        \textbf{YAZIM KURALLARI:}\\[0.2cm]
+        -- Cevaplarınızı kendi el yazınızla, temiz ve okunaklı bir şekilde yazınız.\\
+        -- Lütfen çözümlerinizi yalnızca her soru için ayrılan kutucukların içine yazınız ve dışarı taşırmayınız.\\
+        -- Diyagram, şema ve benzeri çizimlerinizi mutlaka bu işlemler için ayrılmış özel alanlara yapınız.\\[0.1cm]
+        \colorbox{red!15}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{-- Sayfa çıktısını alırken ``sayfaya sığdır'' (fit to page) seçeneğini \textbf{kullanmadığınızdan} veya \textbf{optik işaretlerin eksiksiz olarak kağıda basıldığından} emin olunuz.}}
+    }%
+}
+\vspace{0.5cm}
+    
+\begin{flushleft}
+    \large
+    \textbf{Akademisyen Adı-Soyadı:} \hrulefill{} \\[0.4cm]
+    \textbf{Dersin Şubesi:} \hrulefill{} \\[0.4cm]
+    \textbf{Tarih:} \hrulefill{} \\[0.4cm]
+    \textbf{Öğrenci Numarası:} \hrulefill{} \\[0.4cm]
+    \textbf{Öğrencinin Adı-Soyadı:} \hrulefill{} \\[1cm]
+\end{flushleft}
+    
+\begin{center}
+    \large
+    \textit{Bu çalışmayı kendim yazıya geçirdiğimi beyan ediyorum.} \\[1cm]
+    \textbf{İmza: \rule{4cm}{0.4pt}}
+\end{center}
+
+\vspace{0.5cm}
+\noindent\colorbox{yellow}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+        \textbf{Ödev Teslim Kuralları:}\\
+        Sınıfta haftanın ilk ders gününde veya aynı gün mesai bitinceye kadar elden teslim edilecek, ayrıca aynı tarihe kadar LMS'ye yüklenecektir. Elden teslim edilmeyen ve LMS'de görünmeyen çalışmalar geçersizdir. Kapak sayfasını mutlaka yapınız. Ödevi zımbalayınız. Lütfen şeffaf poşet içine koymayınız.
+    }%
+}
+    
+\end{titlepage}
+
+\newpage
+
+\section*{\textbf{\color{TitleColor}Sorular}}
+
+\noindent\colorbox{yellow!40}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+        \textbf{DİKKAT:} Lütfen aşağıda yer alan soruların tüm çözümlerini, hesaplamalarını ve varsa (Ağaç Diyagramı, Venn Şeması, Devre Şeması vb.) çizimlerini size verilen \textbf{Optik Okuma Uyumlu Cevap Kağıdı (OCR Formu)} üzerinde ilgili \textbf{Soru Numarası}na sahip siyah kutucukların içine yapınız. Venn şeması, diyagram vb. gerektiği durumlarda OCR kutularının başlıklarında bu çizimler için özel olarak ayrılan bölümleri ({\color{ChoiceColor}Örn: Venn Şeması Çizim Alanı}) kullanınız. Bu PDF'in arkasına veya boş alanlarına yazılan cevaplar değerlendirilmeyecektir.
+    }%
+}
+\vspace{0.5cm}
+
+\begin{enumerate}
+
+
+
+\item \textbf{(Beklenen Değer)} Bir şans oyununda iki zar atılmaktadır. Eğer en az bir zar $4$ gelirse veya iki zarın toplamı $7$ gelirse oyuncu $5$~TL kazanır; aksi takdirde $3$~TL kaybeder.
+\begin{enumerate}
+\item Tek oyun için beklenen kazanç/kayıp nedir?
+\item Oyunu $10$ kez oynamadan önce $30$~TL ödersek beklenen toplam net kazanç nedir?
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\item \textbf{(Ayrık Rassal Değişken)} Bir coğrafya ödevinde alınan not $X$ rassal değişkendir. Olasılıklar aşağıdaki gibidir:
+\[
+P(A)=0.18,\quad 
+P(B)=0.32,\quad 
+P(C)=0.25,\quad 
+P(D)=0.07,\quad 
+P(E)=0.03,\quad 
+P(F)=0.15
+\]
+\begin{enumerate}
+\item $X$'in kümülatif olasılık dağılımını (CDF) tablo halinde gösteriniz.
+\item B'den daha yüksek not alma olasılığını hesaplayınız.
+\item C'den daha düşük not alma olasılığını hesaplayınız.
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\item \textbf{(Bayes Teoremi)} Bir fabrikada aynı ürünü üreten 3 makine vardır: $M_1$, $M_2$, $M_3$. Üretim payları:
+\[
+P(M_1)=0.50,\qquad
+P(M_2)=0.30,\qquad
+P(M_3)=0.20
+\]
+Her makinenin hatalı üretim olasılığı:
+\[
+P(H\mid M_1)=0.01,\qquad
+P(H\mid M_2)=0.03,\qquad
+P(H\mid M_3)=0.02
+\]
+Rastgele seçilen bir ürünün hatalı ($H$) olduğu görülüyor. Bu ürünün $M_2$ makinesinden gelmiş olma olasılığı $P(M_2\mid H)$ nedir?
+
+\newpage
+
+\item \textbf{(Sürekli Rassal Değişken)} $X$ sürekli rassal değişkeni için olasılık yoğunluk fonksiyonu aşağıdaki gibi verilmiştir:
+\[
+f(x)=
+\begin{cases}
+c(x+1), & 1<x<3 \\
+0, & \text{aksi halde}
+\end{cases}
+\]
+\begin{enumerate}
+\item $f(x)$'in bir olasılık yoğunluk fonksiyonu olması için $c$ sabitinin değerini bulunuz.
+\item Buna karşılık gelen dağılım fonksiyonunu $F(x)$ bulunuz.
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\item \textbf{(Koşullu Olasılık ve Bayes)} Ülkenin belli bir bölgesinde, $40$ yaş üzeri olup kanser hastalığı olan bir yetişkine rastlama olasılığının $0.05$ olduğu geçmiş tecrübelerden bilinmektedir. Eğer,
+\[
+P(\text{Doğru pozitif}) = 0.78
+\]
+ve
+\[
+P(\text{Yanlış pozitif}) = 0.06
+\]
+ise, $40$ yaş üstü bir yetişkinin \textbf{kanserli biri olarak teşhis edilip gerçekten kanserli olma olasılığı} nedir?
+\end{enumerate}
+
+% ════════════════════════════════════════════════════════════════
+%  OCR CEVAP KAĞIDI
+% ════════════════════════════════════════════════════════════════
+\newpage
+\shorthandoff{=}
+\pagestyle{ocrpage}
+\vspace*{\ocrPageTopShift}
+
+
+
+
+% ═══════════════════════════════════════════════════════════
+% SAYFA 1 (OCR): Soru 1a — Ağaç Diyagramı + Çözüm
+% ═══════════════════════════════════════════════════════════
+\begin{tcolorbox}[ocrbox, height=\ocrMainBoxHeight]
+\begin{minipage}[t][11cm][t]{\textwidth}
+\ocrTopSectionLabel{CEVAP-1A}
+\vfill
+\ocrTopResultBox{SONUC 1A}
+\end{minipage}
+
+\ocrDivider
+
+\begin{minipage}[t][11cm][t]{\textwidth}
+\ocrInnerSectionLabel{CEVAP-1B}
+\vfill
+\ocrInnerResultBox{SONUC 1B}
+\end{minipage}
+\end{tcolorbox}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════
+% SAYFA 2 (OCR): Soru 2 — a) CDF Tablosu  + b) ve c) hesap
+% ═══════════════════════════════════════════════════════════
+\begin{tcolorbox}[ocrbox, height=\ocrMainBoxHeight]
+\begin{minipage}[t][8.4cm][t]{\textwidth}
+\vspace*{0.15cm}
+\ocrTopSectionLabel{CEVAP-2A}
+\vfill
+\ocrTopResultBox{SONUC 2A}
+\end{minipage}
+
+\ocrDivider
+
+\begin{minipage}[t][6.55cm][t]{\textwidth}
+\ocrInnerSectionLabel{CEVAP-2B}
+\vfill
+\ocrInnerResultBox{SONUC 2B}
+\end{minipage}
+
+\ocrDivider
+
+\begin{minipage}[t][6.55cm][t]{\textwidth}
+\ocrInnerSectionLabel{CEVAP-2C}
+\vfill
+\ocrInnerResultBox{SONUC 2C}
+\end{minipage}
+\end{tcolorbox}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════
+% SAYFA 3 (OCR): Soru 3 — Ağaç Diyagramı + Bayes Hesabı
+% ═══════════════════════════════════════════════════════════
+\begin{tcolorbox}[ocrbox, height=\ocrMainBoxHeight]
+\begin{minipage}[t][11cm][t]{\textwidth}
+\ocrTopSectionLabel{CEVAP-3 DIAGRAM}
+\vfill
+\end{minipage}
+
+\ocrDivider
+
+\begin{minipage}[t][11cm][t]{\textwidth}
+\ocrInnerSectionLabel{CEVAP-3 COZUM}
+\vfill
+\ocrInnerResultBox{SONUC 3}
+\end{minipage}
+\end{tcolorbox}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════
+% SAYFA 4 (OCR): Soru 4a — c sabiti  + Soru 4b — F(x)
+% ═══════════════════════════════════════════════════════════
+\begin{tcolorbox}[ocrbox, height=\ocrMainBoxHeight]
+\begin{minipage}[t][11cm][t]{\textwidth}
+\ocrTopSectionLabel{CEVAP-4A}
+\vfill
+\ocrTopResultBox{SONUC 4A}
+\end{minipage}
+
+\ocrDivider
+
+\begin{minipage}[t][11cm][t]{\textwidth}
+\ocrInnerSectionLabel{CEVAP-4B}
+\vfill
+\ocrInnerResultBox{SONUC 4B}
+\end{minipage}
+\end{tcolorbox}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════
+% SAYFA 5 (OCR): Soru 5 — Ağaç Diyagramı + Bayes
+% ═══════════════════════════════════════════════════════════
+\begin{tcolorbox}[ocrbox, height=\ocrMainBoxHeight]
+\begin{minipage}[t][11cm][t]{\textwidth}
+\ocrTopSectionLabel{CEVAP-5 DIAGRAM}
+\vfill
+\end{minipage}
+
+\ocrDivider
+
+\begin{minipage}[t][11cm][t]{\textwidth}
+\ocrInnerSectionLabel{CEVAP-5 COZUM}
+\vfill
+\ocrInnerResultBox{SONUC 5}
+\end{minipage}
+\end{tcolorbox}
+
+\end{document}

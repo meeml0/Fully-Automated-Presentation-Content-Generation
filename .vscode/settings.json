@@ -1,0 +1,146 @@
+{
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.autoBuild.run": "onFileChange",
+  "latex-workshop.latex.autoBuild.cleanAndRetry": true,
+  "latex-workshop.latex.outDir": "%DIR%/outputs",
+  "latex-workshop.intellisense.package.enabled": true,
+  "latex-workshop.intellisense.unimathsymbols.enabled": true,
+  "latex-workshop.intellisense.citation.backend": "biblatex",
+  "latex-workshop.chktex.enabled": true,
+  "latex-workshop.chktex.run": "onType",
+  "latex-workshop.latex.tools": [
+    {
+      "name": "xelatex",
+      "command": "latexmk",
+      "args": [
+        "-xelatex",
+        "-shell-escape",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-outdir=outputs",
+        "-auxdir=temp",
+        "-emulate-aux-dir",
+        "%DOCFILE%"
+      ]
+    },
+    {
+      "name": "latexmk-pdf-split",
+      "command": "latexmk",
+      "args": [
+        "-pdf",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-outdir=outputs",
+        "-auxdir=temp",
+        "-emulate-aux-dir",
+        "%DOCFILE%"
+      ]
+    },
+    {
+      "name": "biber",
+      "command": "biber",
+      "args": [
+        "--input-directory=temp",
+        "--output-directory=temp",
+        "%DOCFILE%"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "XeLaTeX (Quick - split)",
+      "tools": [
+        "xelatex"
+      ]
+    },
+    {
+      "name": "XeLaTeX -> Biber -> XeLaTeX x2 (split)",
+      "tools": [
+        "xelatex",
+        "biber",
+        "xelatex",
+        "xelatex"
+      ]
+    },
+    {
+      "name": "pdfLaTeX (Quick - split)",
+      "tools": [
+        "latexmk-pdf-split"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipe.default": "first",
+  "latex-workshop.latex.clean.subfolderEnabled": true,
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux",
+    "*.bbl",
+    "*.blg",
+    "*.idx",
+    "*.ind",
+    "*.lof",
+    "*.lot",
+    "*.out",
+    "*.toc",
+    "*.acn",
+    "*.acr",
+    "*.alg",
+    "*.glg",
+    "*.glo",
+    "*.gls",
+    "*.ist",
+    "*.fls",
+    "*.log",
+    "*.fdb_latexmk",
+    "*.synctex.gz",
+    "*.vrb",
+    "*.snm",
+    "*.nav",
+    "*.run.xml",
+    "_minted*"
+  ],
+  "files.exclude": {
+    "**/*.aux": true,
+    "**/*.log": true,
+    "**/*.toc": true,
+    "**/*.out": true,
+    "**/*.fls": true,
+    "**/*.fdb_latexmk": true,
+    "**/*.synctex.gz": true,
+    "**/*.gz": true,
+    "**/*.dvi": true,
+    "**/*.lof": true,
+    "**/*.lot": true,
+    "**/*.bit": true,
+    "**/*.idx": true,
+    "**/*.glo": true,
+    "**/*.bbl": true,
+    "**/*.blg": true,
+    "**/*.ilg": true,
+    "**/*.ind": true,
+    "**/*.glg": true,
+    "**/*.gls": true,
+    "**/*.acr": true,
+    "**/*.alg": true,
+    "**/*.xdy": true,
+    "**/*.xdv": true,
+    "**/*.bak": true,
+    "**/*.sav": true,
+    "**/*.tmp": true,
+    "**/*~": true,
+    "**/*.swp": true,
+    "**/*.swo": true,
+    "**/*.snm": true,
+    "**/*.nav": true,
+    "**/*.vrb": true,
+    "**/*.bcf": true,
+    "**/*.run.xml": true,
+    "**/*.spl": true
+  },
+  "files.associations": {
+    "*.aux": "plaintext"
+  },
+  "latex-workshop.latex.magic.bib.fallback": "biber",
+  "latex-workshop.synctex.afterBuild.enabled": true
+}

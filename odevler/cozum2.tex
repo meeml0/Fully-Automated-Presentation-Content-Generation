@@ -1,0 +1,302 @@
+﻿% !TeX program = xelatex
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{fontspec}
+\usepackage[turkish]{babel}
+\AtBeginDocument{\shorthandoff{=}}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\setmainfont{Latin Modern Roman}
+
+\geometry{margin=2.5cm}
+
+\definecolor{TitleColor}{HTML}{0B3C5D}
+\definecolor{QuestionColor}{HTML}{0D3B66}
+\definecolor{ChoiceColor}{HTML}{8A2D12}
+
+\renewcommand{\labelenumi}{\textbf{\color{QuestionColor}\arabic{enumi}.}}
+\renewcommand{\labelenumii}{\textbf{\color{ChoiceColor}(\alph{enumii})}}
+
+\setlist[enumerate,1]{leftmargin=*,font=\bfseries\color{QuestionColor}}
+\setlist[enumerate,2]{leftmargin=1.2cm,font=\bfseries\color{ChoiceColor}}
+\setlist[itemize]{leftmargin=1.2cm,font=\bfseries\color{ChoiceColor},label=\textbf{\color{ChoiceColor}$\blacktriangleright$}}
+
+\title{\textbf{\color{TitleColor}Mühendisler için Olasılık ve İstatistik MAT204\\[0.3cm]
+Pekiştirme Çalışması 2 -- Çözümler}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{\textbf{\color{TitleColor}Cevaplar}}
+
+\begin{enumerate}
+
+%--------------------------------------------------------------------
+% SORU 1 — Beklenen Değer
+%--------------------------------------------------------------------
+\item İki zar atıldığında toplam örnek uzay $|S|=36$'dır.
+
+\textbf{Olayların tanımı:}
+\[
+A=\text{``en az bir zar 4 gelir''},\qquad B=\text{``toplamı 7 olan çiftler''}.
+\]
+
+\textbf{$A$ olayının olasılığı} (tamamlayıcı olay ile):
+\[
+P(A)=1-P(\text{hiçbir zar 4 değil})=1-\frac{5}{6}\cdot\frac{5}{6}=1-\frac{25}{36}=\frac{11}{36}.
+\]
+
+\textbf{$B$ olayının olasılığı} ($(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)$ toplamı $7$):
+\[
+P(B)=\frac{6}{36}=\frac{1}{6}.
+\]
+
+\textbf{Kesişim $A\cap B$} (hem toplam $7$ hem en az bir zar $4$: $(4,3)$ ve $(3,4)$):
+\[
+P(A\cap B)=\frac{2}{36}.
+\]
+
+\textbf{Kazanma olasılığı} (dahil etme\,--\,çıkarma):
+\[
+P(K)=P(A)+P(B)-P(A\cap B)=\frac{11}{36}+\frac{6}{36}-\frac{2}{36}=\frac{15}{36}=\frac{5}{12}.
+\]
+
+\textbf{Kaybetme olasılığı:}
+\[
+P(L)=1-\frac{5}{12}=\frac{7}{12}.
+\]
+
+\begin{center}
+\begin{tikzpicture}[>=latex, line width=0.8pt]
+  \node (om) at (0,0) {$\Omega$};
+  \node (k)  at (3.2, 1.2) {Kazan ($+5$~TL)};
+  \node (l)  at (3.2,-1.2) {Kaybet ($-3$~TL)};
+  \draw[->,blue!70!black] (om) -- (k) node[midway,above] {$\dfrac{5}{12}$};
+  \draw[->,gray!70]       (om) -- (l) node[midway,below] {$\dfrac{7}{12}$};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+\item Tek oyun için beklenen değer:
+\[
+E(X)=5\cdot\frac{5}{12}+(-3)\cdot\frac{7}{12}=\frac{25}{12}-\frac{21}{12}=\frac{4}{12}=\frac{1}{3}\ \text{TL}.
+\]
+\[
+{\color{red}\boxed{E(X)=\frac{1}{3}\ \text{TL}\approx 0{,}33\ \text{TL}}}
+\]
+
+\item $10$ oyun için beklenen toplam kazanç:
+\[
+10\cdot E(X)=10\cdot\frac{1}{3}=\frac{10}{3}\ \text{TL}.
+\]
+Başlangıç ücreti ($30$~TL) düşüldüğünde net beklenen değer:
+\[
+\frac{10}{3}-30=\frac{10-90}{3}=-\frac{80}{3}\ \text{TL}\approx -26{,}67\ \text{TL}.
+\]
+\[
+{\color{red}\boxed{\text{Net beklenen kazanç}=-\frac{80}{3}\ \text{TL}\approx -26{,}67\ \text{TL}}}
+\]
+\end{enumerate}
+
+%--------------------------------------------------------------------
+% SORU 2 — Ayrık Rassal Değişken / CDF
+%--------------------------------------------------------------------
+\item Verilen olasılıklar (notlar kötüden iyiye sıralanmıştır):
+\[
+P(F)=0.15,\quad
+P(E)=0.03,\quad
+P(D)=0.07,\quad
+P(C)=0.25,\quad
+P(B)=0.32,\quad
+P(A)=0.18.
+\]
+
+\begin{enumerate}
+\item Kümülatif dağılım fonksiyonu (CDF) tablosu:
+
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Not} & $P(X=x)$ & $F(x)=P(X\le x)$\\
+\midrule
+F & $0.15$ & $0.15$\\
+E & $0.03$ & $0.18$\\
+D & $0.07$ & $0.25$\\
+C & $0.25$ & $0.50$\\
+B & $0.32$ & $0.82$\\
+A & $0.18$ & $1.00$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\item B'den daha yüksek not almak yalnızca A notunu almak anlamına gelir:
+\[
+P(X>B)=P(A)=0.18.
+\]
+\[
+{\color{red}\boxed{P(X>B)=0.18}}
+\]
+
+\item C'den daha düşük not almak D, E veya F notlarından birini almak demektir:
+\[
+P(X<C)=P(D)+P(E)+P(F)=0.07+0.03+0.15=0.25.
+\]
+\[
+{\color{red}\boxed{P(X<C)=0.25}}
+\]
+\end{enumerate}
+
+%--------------------------------------------------------------------
+% SORU 3 — Bayes Teoremi (Makine)
+%--------------------------------------------------------------------
+\item Verilenler:
+\[
+P(M_1)=0.50,\qquad P(M_2)=0.30,\qquad P(M_3)=0.20,
+\]
+\[
+P(H\mid M_1)=0.01,\qquad P(H\mid M_2)=0.03,\qquad P(H\mid M_3)=0.02.
+\]
+
+\begin{center}
+\begin{tikzpicture}[>=latex, line width=0.8pt]
+  \node (om) at (0,0) {$\Omega$};
+  \node (m1) at (3.0, 2.2) {$M_1$};
+  \node (m2) at (3.0, 0.0) {$M_2$};
+  \node (m3) at (3.0,-2.2) {$M_3$};
+  \node (h1) at (6.2, 3.0) {$H$};
+  \node (h1c) at (6.2, 1.5) {$H'$};
+  \node (h2) at (6.2, 0.8) {$H$};
+  \node (h2c) at (6.2,-0.7) {$H'$};
+  \node (h3) at (6.2,-1.5) {$H$};
+  \node (h3c) at (6.2,-3.0) {$H'$};
+
+  \draw[->,blue!70!black] (om) -- (m1) node[midway,above] {$0.50$};
+  \draw[->,orange!80!black](om) -- (m2) node[midway,above] {$0.30$};
+  \draw[->,gray!70]        (om) -- (m3) node[midway,below] {$0.20$};
+
+  \draw[->,red!70!black]  (m1) -- (h1)  node[midway,above] {$0.01$};
+  \draw[->,gray!60]       (m1) -- (h1c) node[midway,below] {$0.99$};
+  \draw[->,red!70!black]  (m2) -- (h2)  node[midway,above] {$0.03$};
+  \draw[->,gray!60]       (m2) -- (h2c) node[midway,below] {$0.97$};
+  \draw[->,red!70!black]  (m3) -- (h3)  node[midway,above] {$0.02$};
+  \draw[->,gray!60]       (m3) -- (h3c) node[midway,below] {$0.98$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Toplam olasılık kuralı ile $P(H)$:}
+\[
+P(H)=P(H\mid M_1)P(M_1)+P(H\mid M_2)P(M_2)+P(H\mid M_3)P(M_3)
+\]
+\[
+P(H)=0.01\cdot0.50+0.03\cdot0.30+0.02\cdot0.20=0.005+0.009+0.004=0.018.
+\]
+
+\textbf{Bayes teoremi ile $P(M_2\mid H)$:}
+\[
+P(M_2\mid H)=\frac{P(H\mid M_2)\,P(M_2)}{P(H)}=\frac{0.03\cdot0.30}{0.018}=\frac{0.009}{0.018}=0.50.
+\]
+\[
+{\color{red}\boxed{P(M_2\mid H)=0.50}}
+\]
+
+%--------------------------------------------------------------------
+% SORU 4 — Sürekli Rassal Değişken / PDF ve CDF
+%--------------------------------------------------------------------
+\item Olasılık yoğunluk fonksiyonu:
+\[
+f(x)=c(x+1),\qquad 1<x<3.
+\]
+
+\begin{enumerate}
+\item \textbf{$c$ sabitinin bulunması} (normalizasyon koşulu):
+\[
+\int_{1}^{3}f(x)\,dx=1
+\quad\Rightarrow\quad
+c\int_{1}^{3}(x+1)\,dx=1.
+\]
+İntegral hesaplanır:
+\[
+\int_{1}^{3}(x+1)\,dx=\left[\frac{x^2}{2}+x\right]_{1}^{3}
+=\left(\frac{9}{2}+3\right)-\left(\frac{1}{2}+1\right)=\frac{15}{2}-\frac{3}{2}=6.
+\]
+Buradan:
+\[
+6c=1\quad\Rightarrow\quad c=\frac{1}{6}.
+\]
+\[
+{\color{red}\boxed{c=\frac{1}{6}}}
+\]
+
+\item \textbf{Dağılım fonksiyonu $F(x)$:}
+\[
+F(x)=\int_{1}^{x}\frac{1}{6}(t+1)\,dt
+=\frac{1}{6}\left[\frac{t^2}{2}+t\right]_{1}^{x}
+=\frac{1}{6}\left(\frac{x^2}{2}+x-\frac{3}{2}\right)
+=\frac{x^2+2x-3}{12}.
+\]
+\[
+{\color{red}\boxed{F(x)=
+\begin{cases}
+0, & x\le 1,\\[4pt]
+\dfrac{x^2+2x-3}{12}, & 1<x<3,\\[4pt]
+1, & x\ge 3.
+\end{cases}}}
+\]
+\end{enumerate}
+
+%--------------------------------------------------------------------
+% SORU 5 — Koşullu Olasılık ve Bayes (Kanser Testi)
+%--------------------------------------------------------------------
+\item Verilenler:
+\[
+P(C)=0.05,\qquad P(C^c)=0.95,
+\]
+\[
+P(+\mid C)=0.78,\qquad P(+\mid C^c)=0.06.
+\]
+
+\begin{center}
+\begin{tikzpicture}[>=latex, line width=0.8pt]
+  \node (om) at (0,0) {$\Omega$};
+  \node (c)  at (3.0, 1.5) {$C$};
+  \node (cc) at (3.0,-1.5) {$C^c$};
+  \node (cp) at (6.2, 2.3) {$+$};
+  \node (cn) at (6.2, 0.8) {$-$};
+  \node (ccp) at (6.2,-0.8) {$+$};
+  \node (ccn) at (6.2,-2.3) {$-$};
+
+  \draw[->,blue!70!black]  (om) -- (c)   node[midway,above] {$0.05$};
+  \draw[->,gray!70]        (om) -- (cc)  node[midway,below] {$0.95$};
+  \draw[->,red!70!black]   (c)  -- (cp)  node[midway,above] {$0.78$};
+  \draw[->,gray!60]        (c)  -- (cn)  node[midway,below] {$0.22$};
+  \draw[->,red!70!black]   (cc) -- (ccp) node[midway,above] {$0.06$};
+  \draw[->,gray!60]        (cc) -- (ccn) node[midway,below] {$0.94$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Toplam pozitif test olasılığı:}
+\[
+P(+)=P(+\mid C)\,P(C)+P(+\mid C^c)\,P(C^c)
+=0.78\cdot0.05+0.06\cdot0.95
+=0.039+0.057=0.096.
+\]
+
+\textbf{Bayes teoremi uygulanır:}
+\[
+P(C\mid +)=\frac{P(+\mid C)\,P(C)}{P(+)}=\frac{0.78\cdot0.05}{0.096}=\frac{0.039}{0.096}\approx 0.4063.
+\]
+\[
+{\color{red}\boxed{P(C\mid +)\approx 0.4063}}
+\]
+
+Bu sonuç, test pozitif çıksa bile gerçekten kanserli olma olasılığının yalnızca yaklaşık \%40.6 olduğunu gösterir. Hastalığın toplumda düşük yaygınlıkta ($P(C)=0.05$) olması bu değeri beklenenden küçük kılar.
+
+\end{enumerate}
+
+\end{document}

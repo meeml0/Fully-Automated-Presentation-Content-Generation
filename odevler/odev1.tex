@@ -1,0 +1,178 @@
+﻿% !TeX program = xelatex
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{fontspec}
+\usepackage[turkish]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\setmainfont{Latin Modern Roman}
+
+\geometry{margin=2.5cm}
+
+\definecolor{TitleColor}{HTML}{0B3C5D}
+\definecolor{QuestionColor}{HTML}{0D3B66}
+\definecolor{ChoiceColor}{HTML}{8A2D12}
+
+\renewcommand{\labelenumi}{\textbf{\color{QuestionColor}\arabic{enumi}.}}
+\renewcommand{\labelenumii}{\textbf{\color{ChoiceColor}(\alph{enumii})}}
+
+\setlist[enumerate,1]{leftmargin=*,font=\bfseries\color{QuestionColor}}
+\setlist[enumerate,2]{leftmargin=1.2cm,font=\bfseries\color{ChoiceColor}}
+\setlist[itemize]{leftmargin=1.2cm,font=\bfseries\color{ChoiceColor},label=\textbf{\color{ChoiceColor}$\blacktriangleright$}}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+
+    
+    {\Huge \textbf{\color{TitleColor}Mühendisler için Olasılık ve İstatistik MAT204}}\\[0.5cm]
+    
+    {\Large \textbf{PEKİŞTİRME ÇALIŞMASI 1~-- ÖDEV}}\\[1cm]
+    
+    \colorbox{yellow}{\large \textbf{TESLİM TARİHİ:} 23.02.2026 -- 06.03.2026}\\[1cm]
+\end{center}
+    
+\noindent\colorbox{yellow!30}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+        \textbf{YAZIM KURALLARI:}\\[0.2cm]
+        -- Özel OCR desenli kağıda\\
+        -- Elle\\
+        -- Temizce\\
+        -- Okunaklı\\
+        -- Her Soru için ayrılan alana\\
+        -- Diyagram vb. çizimler için ayrılan alanları kullanınız
+
+    }%
+}
+\vspace{0.5cm}
+    
+\begin{flushleft}
+    \large
+    \textbf{Akademisyen Adı-Soyadı:} \hrulefill{} \\[0.4cm]
+    \textbf{Dersin Şubesi:} \hrulefill{} \\[0.4cm]
+    \textbf{Tarih:} \hrulefill{} \\[0.4cm]
+    \textbf{Öğrenci Numarası:} \hrulefill{} \\[0.4cm]
+    \textbf{Öğrencinin Adı-Soyadı:} \hrulefill{} \\[1cm]
+\end{flushleft}
+    
+\begin{center}
+    \large
+    \textit{Bu çalışmayı kendim yazıya geçirdiğimi beyan ediyorum.} \\[1cm]
+    \textbf{İmza: \rule{4cm}{0.4pt}}
+\end{center}
+
+\vspace{0.5cm}
+\noindent\colorbox{yellow}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+        \textbf{Ödev Teslim Kuralları:}\\
+        Sınıfta haftanın ilk ders gününde veya aynı gün mesai bitinceye kadar elden teslim edilecek, ayrıca aynı tarihe kadar LMS'ye yüklenecektir. Elden teslim edilmeyen ve LMS'de görünmeyen çalışmalar geçersizdir. Kapak sayfasını mutlaka yapınız. Ödevi zımbalayınız. Lütfen şeffaf poşet içine koymayınız.
+    }%
+}
+    
+\end{titlepage}
+
+\newpage
+
+\section*{\textbf{\color{TitleColor}Sorular}}
+
+\noindent\colorbox{yellow!40}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+        \textbf{DİKKAT:} Lütfen aşağıda yer alan soruların tüm çözümlerini, hesaplamalarını ve varsa (Ağaç Diyagramı, Venn Şeması, Devre Şeması vb.) çizimlerini size verilen \textbf{Optik Okuma Uyumlu Cevap Kağıdı (OCR Formu)} üzerinde ilgili \textbf{Soru Numarası}na sahip siyah kutucukların içine yapınız. Venn şeması, diyagram vb. gerektiği durumlarda OCR kutularının başlıklarında bu çizimler için özel olarak ayrılan bölümleri ({\color{ChoiceColor}Örn: Venn Şeması Çizim Alanı}) kullanınız. Bu PDF'in arkasına veya boş alanlarına yazılan cevaplar değerlendirilmeyecektir.
+    }%
+}
+\vspace{0.5cm}
+
+\begin{enumerate}
+\item \textbf{(Sayma-Kombinasyon)} Bir öğrenci kütüphanedeki 8 olasılık kitabı arasından 4 kitap ve 6 fizik kitabı arasından 2 kitap seçecektir. Buna göre kaç farklı seçim yapılabilir?
+
+\item \textbf{(Koşullu Olasılık - Zar)} Adil bir 6 yüzlü zar atılıyor. Gelen sayının çift olduğu bilgisi verildiğine göre
+\begin{enumerate}
+\item \[
+P(X=4\mid X\in\{2,4,6\})
+\]
+olasılığını bulunuz.
+\item Gelen sayının çift gelme bilgisi gelmeden önce ve geldiğinden sonra olasılık hesabınızda nasıl bir değişiklik oldu açıklayınız. 
+\end{enumerate}
+
+\item \textbf{(Koşullu Olasılık)} Bir fabrikada üretilen bir ürün için
+\begin{itemize}
+\item $C=$ ``ürün çizikli'' olayı, $P(C)=0.30$
+\item $R=$ ``ürün renk hatalı'' olayı, $P(R)=0.50$
+\item $P(C\cap R)=0.18$
+\end{itemize}
+\begin{enumerate}
+\item $P(R\mid C)$ değerini bulunuz.
+\item $P(C\mid R)$ değerini bulunuz.
+\end{enumerate}
+
+\item \textbf{(Birleşim-Kesişim)} Olaylar
+\[
+M=\text{``matematik dersinden geçme''},\qquad O=\text{``optimizasyon dersinden geçme''}
+\]
+olsun. $P(M)=0.50$, $P(O)=0.40$ ve $P(M\cap O)=0.20$ verildiğine göre $P(M\cup O)$ değerini bulunuz.
+
+\item \textbf{(Geri Koymasız Seçim)} Bir üretim partisinde 27 kusursuz ve 3 kusurlu parça vardır. Geri koymasız olarak ardışık 2 parça seçiliyor.
+\begin{enumerate}
+\item Birinci parçanın kusurlu olma olasılığını bulunuz.
+\item Birinci parça kusurlu ise, ikinci parçanın kusurlu olma olasılığını bulunuz.
+\item İki parçanın da kusurlu olma olasılığını bulunuz.
+\end{enumerate}
+
+\item \textbf{(Bağımsız Olaylar)} İki transistörden oluşan seri bir devrede arıza olayları bağımsızdır. Olaylar
+\[
+T_1=\text{``1. transistör arızası''},\qquad T_2=\text{``2. transistör arızası''}
+\]
+olmak üzere $P(T_1)=0.05$ ve $P(T_2)=0.08$ veriliyor. Devrenin çalışmama olasılığı $P(T_1\cup T_2)$ değerini bulunuz.
+
+\item \textbf{(Tamamlayıcı Olay)} Bir montaj hattında bir parça ardışık olarak $A$, $B$ ve $C$ aşamalarından geçmektedir. Hata olasılıkları
+\[
+P(H_A)=0.01,\qquad P(H_B)=0.02,\qquad P(H_C)=0.03
+\]
+olsun. Aşamaların bağımsız olduğu varsayımı altında parçanın tamamen hatasız tamamlanma olasılığını bulunuz.
+
+\item \textbf{(Toplam Olasılık)} Bir laboratuvarda karbon nanotüpler iki yöntemle üretiliyor: $X$ ve $Y$. Olaylar
+\[
+\begin{aligned}
+U&=\text{``tüp istenen uzunlukta''},\\
+X&=\text{``Metot X ile üretim''},\\
+Y&=\text{``Metot Y ile üretim''}
+\end{aligned}
+\]
+olsun. Verilenler:
+\[
+P(U\mid X)=0.80,\quad P(U\mid Y)=0.60,\quad P(X)=0.40,\quad P(Y)=0.60.
+\]
+Rastgele seçilen bir tüpün istenen uzunlukta olma olasılığını, yani $P(U)$ değerini bulunuz.
+
+\item \textbf{(Bayes Teoremi)} Bir hastalık için
+\[
+P(D)=0.02,\qquad P(+\mid D)=0.95,\qquad P(-\mid D')=0.90
+\]
+veriliyor ($D$: hasta olma, $D'$: sağlıklı olma, $+$: testin pozitif çıkması). Testi pozitif çıkan bir kişinin gerçekten hasta olma olasılığını, yani $P(D\mid +)$ değerini bulunuz.
+
+\item \textbf{(Karma: Toplam Olasılık + Bayes)} Bir hastane için olaylar
+\[
+Y=\text{``yüksek ateş''},\qquad O=\text{``öksürük''},\qquad T=\text{``test pozitif''}
+\]
+olarak tanımlansın. Verilenler:
+\[
+P(Y)=0.40,\qquad P(O)=0.35,\qquad P(Y\cap O)=0.25.
+\]
+Testin pozitif çıkma olasılıkları:
+\begin{itemize}
+\item $P(T\mid \text{sadece }Y)=0.90$
+\item $P(T\mid \text{sadece }O)=0.70$
+\item $P(T\mid Y\cap O)=0.95$
+\item $P(T\mid Y'\cap O')=0.10$
+\end{itemize}
+\begin{enumerate}
+\item $P(T)$ değerini bulunuz.
+\item $P(Y\cap O\mid T)$ değerini bulunuz.
+\item $P(Y'\cap O'\mid T)$ değerini bulunuz.
+\end{enumerate}
+\end{enumerate}
+
+\end{document}

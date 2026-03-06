@@ -1,0 +1,68 @@
+% ===================================================================
+% SKILL: SUNUM AKIŞI (TOC) VE BÖLÜM YAPISI
+% ===================================================================
+% TANIM:
+% Bu dosya, sunumun ana omurgasını oluşturan iki kritik yapıyı içerir:
+% 
+% 1. OTOMATİK AKIŞ FRAME'İ: Her yeni bölüme geçildiğinde otomatik olarak
+%    ekrana gelen ve sunumun neresinde olduğumuzu gösteren "Sunum Akışı"
+%    ekranının kodudur. İçeriği çok olan derslerde "Çift Sütun" (Double Column)
+%    yapısı kullanılarak taşma engellenir.
+% 
+% 2. STANDART İÇERİK İSKELETİ: İçeriğinizi oluştururken kullanmanız gereken
+%    Section > Subsection > Frame hiyerarşisinin boş şablonudur.
+% ===================================================================
+
+% -------------------------------------------------------------------
+% 1. OTOMATİK SUNUM AKIŞI (PREAMBLE KISMI)
+% -------------------------------------------------------------------
+% Bu kod bloğunu \begin{document} öncesine yapıştırın.
+% Her \section{} komutu algılandığında bu frame otomatik üretilir.
+
+\AtBeginSection[]{
+  \begin{frame}{Sunum Akışı} % Frame Başlığı
+  \footnotesize % Yazıları sığdırmak için küçültülmüş font
+  
+  % Maddeler arası boşluğu ayarlar (daha şık görünüm için)
+  \addtobeamertemplate{section in toc}{}{\vspace{0.15cm}}
+  
+  % Çift Sütun Yapısı (Eğer bölüm sayısı az ise tek sütun yapabilirsiniz)
+  \begin{columns}[t]
+    % SOL SÜTUN (İlk 3 Bölüm)
+    \column{.5\textwidth}
+    \tableofcontents[sections={1--3},currentsection]
+    
+    % SAĞ SÜTUN (Kalan Bölümler)
+    \column{.5\textwidth}
+    \tableofcontents[sections={4--10},currentsection]
+  \end{columns}
+  \end{frame}
+}
+
+% -------------------------------------------------------------------
+% 2. İÇERİK İSKELETİ (DOCUMENT BODY KISMI)
+% -------------------------------------------------------------------
+% Sunumunuzu oluştururken aşağıdaki hiyerarşiyi kopyalayıp çoğaltın.
+
+% ANA BÖLÜM (Otomatik Akış Ekranını Bu Tetikler)
+\section{Bölüm Başlığı} 
+
+    % ALT BÖLÜM (İsteğe bağlı, karmaşık konuları bölmek için)
+    \subsection{Alt Konu Başlığı}
+
+        % STANDART BOŞ FRAME
+        \begin{frame}{Slayt Başlığı}
+            \justifying{} % Metni iki yana yaslar (Okunabilirlik için önemli)
+            
+            % İçerik buraya gelecek...
+            Buraya metin, madde işaretleri veya görseller gelecek.
+            
+        \end{frame}
+
+        % İKİNCİ FRAME ÖRNEĞİ
+        \begin{frame}{Slayt Başlığı 2}
+            \begin{itemize}
+                % İçerik buraya gelecek...
+                Buraya metin, madde işaretleri veya görseller gelecek.
+            \end{itemize}
+        \end{frame}

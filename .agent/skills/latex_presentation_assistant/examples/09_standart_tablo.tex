@@ -1,0 +1,43 @@
+% ===================================================================
+% SKILL: STANDART ZEBRA DESENLİ TABLO
+% ===================================================================
+% TANIM:
+% Bu şablon, verileri sunmak için okunaklı, şık ve profesyonel bir 
+% tablo yapısı oluşturur.
+% 
+% ÖZELLİKLER:
+% 1. "booktabs" paketi (\toprule, \midrule, \bottomrule) ile modern çizgi yapısı.
+% 2. "rowcolors" ile zebra deseni (okumayı kolaylaştırır).
+% 3. "resizebox" ile tabloyu slayt genişliğine (veya istediğiniz orana) 
+%    otomatik sığdırma.
+% ===================================================================
+
+\begin{frame}{Tablo Başlığı}
+    % Tabloyu ortalar
+    \centering 
+    
+    % Tablo Başlığı (Opsiyonel)
+    \textbf{Tablo: Veri Dağılımı Örneği}
+    \vspace{0.2em}
+    
+    % \resizebox{GENİŞLİK}{!}{İÇERİK}
+    % Tablo çok büyükse 0.9\textwidth ile slayta sığdırır.
+    \resizebox{0.9\textwidth}{!}{
+        
+        % Zebra Deseni: 2. satırdan başla, gri!10 ve beyaz renkleri değiştir.
+        \rowcolors{2}{gray!10}{white}
+        
+        \begin{tabular}{c c c} % Sütun hizalamaları (c: center, l: left, r: right)
+            \toprule
+            \textbf{Başlık 1} & \textbf{Başlık 2} & \textbf{Başlık 3} \\
+            \midrule
+            Veri A-1          & Veri A-2          & Veri A-3          \\
+            Veri B-1          & Veri B-2          & Veri B-3          \\
+            Veri C-1          & Veri C-2          & Veri C-3          \\
+            Veri D-1          & Veri D-2          & Veri D-3          \\
+            \midrule
+            \textbf{Toplam}   & \textbf{Sonuç}    & \textbf{\%100}    \\
+            \bottomrule
+        \end{tabular}
+    }
+\end{frame}

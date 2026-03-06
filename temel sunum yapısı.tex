@@ -1,0 +1,278 @@
+\documentclass[light]{lutbeamer}
+\usepackage{pgfpages}
+\usepackage{ragged2e}
+\usepackage{booktabs}
+\usepackage{amssymb}
+\usepackage{fontawesome5}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\addbibresource{references.bib}
+
+% ===================================================================
+% METADATA (DERS KIMLIK BILGILERI)
+% ===================================================================
+\setdepartment{OSTIM Teknik Üniversitesi}
+\institute{}
+\author[Mühendislik Fakültesi]{\\
+Prof.~Dr.~Yalçın ATA \\
+Prof.~Dr.~Arif DEMİR \\
+Dr.~Öğr.~Üyesi~Emel GÜVEN \\
+Dr.~Öğr.~Üyesi~Ufuk ASIL \\
+Öğr.~Gör.~Sema ÇİFTÇİ
+}
+\title{MATH 204 -- Mühendisler için Olasılık ve İstatistik}
+\subtitle{Hafta X: Beklenen Değer, Varyans ve Standart Sapma}
+\date{2025--2026 Bahar Dönemi}
+
+% ===================================================================
+% AUTOMATIC TABLE OF CONTENTS (PRESENTATION FLOW)
+% ===================================================================
+\setcounter{tocdepth}{2}
+
+\AtBeginSection[]{
+  \begin{frame}{Sunum Planı}
+    \scriptsize
+    \begin{columns}[T]
+      \begin{column}{0.48\textwidth}
+        \tableofcontents[sections={1-4}, currentsection]
+      \end{column}
+      \begin{column}{0.48\textwidth}
+        \tableofcontents[sections={5-10}, currentsection]
+      \end{column}
+    \end{columns}
+  \end{frame}
+}
+
+\begin{document}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \begin{beamercolorbox}[wd=\paperwidth, ht=10pt, dp=1pt]{footline}
+    \usebeamerfont{footline}
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[anchor=south west, xshift=10mm, yshift=.4mm]
+      at (current page.south west)
+      {\insertshortauthor,~\department};
+    \end{tikzpicture}
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[anchor=south east, xshift=-5mm, yshift=0.5mm]
+      at (current page.south east)
+      {\insertframenumber \,/\, \inserttotalframenumber};
+    \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+% ===================================================================
+% KAPAK SLAYTLARI
+% ===================================================================
+
+% Gorsel Tam Kapak (Logosuz)
+\begin{frame}<article:0>[plain,noframenumbering]
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=center, at=(current page.center), inner sep=0pt] {
+      \includegraphics[width=\paperwidth, height=\paperheight]{logos/background_figure.jpg}
+    };
+  \end{tikzpicture}
+\end{frame}
+
+% Resmi Baslik Sayfasi (kapak icin ozel alt bilgi)
+{
+  \setbeamertemplate{footline}{
+    \begin{beamercolorbox}[wd=\paperwidth, ht=10pt, dp=1pt]{footline}
+      \usebeamerfont{footline}
+      \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=south west, xshift=10mm, yshift=.4mm, align=left]
+        at (current page.south west)
+        {\tiny Bu şablon OTU Yazılım Mühendisliği tarafından hazırlanmış olup \href{https://github.com/ufukasia/Ostim-Teknik--niversitesi-Yaz-l-m-M-hendisli-i---Lutbeamer-egitim-i-eri-i-haz-rlama-}{buradan} güncel haline ulaşabilirsiniz.};
+      \end{tikzpicture}
+      \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=south east, xshift=-5mm, yshift=0.5mm]
+        at (current page.south east)
+        {\insertframenumber \,/\, \inserttotalframenumber};
+      \end{tikzpicture}
+    \end{beamercolorbox}
+  }
+  \maketitle{}
+}
+
+% GENEL ICERIK HARITASI
+\begin{frame}{İçindekiler}
+  \scriptsize
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \tableofcontents[sections={1-4}]
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \tableofcontents[sections={5-10}]
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ===================================================================
+% ICERIK: HAFTA 7 - BEKLENEN DEGER, VARYANS, STANDART SAPMA
+% ===================================================================
+
+\section{Beklenen Değer Kavramı}
+\subsection{Uzun Dönem Ortalama Fikri}
+
+\begin{frame}{Deneysel Ortalama vs. Teorik Ortalama}
+\end{frame}
+
+\begin{frame}{Beklenen Değerin Yorumu}
+\end{frame}
+
+\subsection{Ayrık ve Sürekli Durumda Tanım}
+
+\begin{frame}{Ayrık Rastgele Değişken için Beklenen Değer}
+\end{frame}
+
+\begin{frame}{Sürekli Rastgele Değişken için Beklenen Değer}
+\end{frame}
+
+\section{Fonksiyonların Beklenen Değeri}
+\subsection{g(X) Kavramı}
+
+\begin{frame}{Rastgele Değişken Üzerinden Yeni Rastgele Değişken}
+\end{frame}
+
+\begin{frame}{Dönüşüm ve Beklenen Değer}
+\end{frame}
+
+\subsection{Genel Beklenen Değer Teoremi}
+
+\begin{frame}{Ayrık Durumda E[g(X)]}
+\end{frame}
+
+\begin{frame}{Sürekli Durumda E[g(X)]}
+\end{frame}
+
+\section{Birden Fazla Rastgele Değişken için Beklenen Değer}
+\subsection{E[g(X, Y)] Kavramı}
+
+\begin{frame}{Ortak Dağılım Üzerinden Beklenen Değer}
+\end{frame}
+
+\begin{frame}{Çok Boyutlu Beklenti Yorumu}
+\end{frame}
+
+\subsection{Marjinal Dağılımlar ile İlişki}
+
+\begin{frame}{E(X) ve E(Y)'nin Marjinal Üzerinden Hesabı}
+\end{frame}
+
+\begin{frame}{Tek Değişkenli Beklentiye İndirgeme}
+\end{frame}
+
+\section{Varyans Kavramı}
+\subsection{Yayılım Ölçüsü Olarak Varyans}
+
+\begin{frame}{Ortalama Etrafında Dağılım}
+\end{frame}
+
+\begin{frame}{Sapmaların Karesi Fikri}
+\end{frame}
+
+\subsection{Varyansın Tanımı}
+
+\begin{frame}{Var(X) Tanımı}
+\end{frame}
+
+\begin{frame}{$E[(X-\mu)^2]$ Yorumu}
+\end{frame}
+
+\section{Standart Sapma}
+\subsection{Ölçekle Uyumlu Yayılım Ölçüsü}
+
+\begin{frame}{Standart Sapmanın Tanımı}
+\end{frame}
+
+\begin{frame}{Varyans ile İlişkisi}
+\end{frame}
+
+\section{Beklenen Değer ve Varyansın Özellikleri}
+\subsection{Lineerlik Özellikleri}
+
+\begin{frame}{E(aX + b) Yapısı}
+\end{frame}
+
+\begin{frame}{Sabit ve Ölçekleme Etkisi}
+\end{frame}
+
+\subsection{Varyansın Dönüşüm Özellikleri}
+
+\begin{frame}{Var(aX + b) Yapısı}
+\end{frame}
+
+\begin{frame}{Ölçeklemenin Etkisi}
+\end{frame}
+
+\section{Haftanın Kavramsal Özeti}
+\subsection{Merkez ve Yayılım Perspektifi}
+
+\begin{frame}{Beklenen Değer = Merkez}
+\end{frame}
+
+\begin{frame}{Varyans ve Standart Sapma = Yayılım}
+\end{frame}
+
+\subsection{İstatistiksel Modellemede Rolü}
+
+\begin{frame}{Parametre Kavramına Geçiş}
+\end{frame}
+
+\begin{frame}{Tahmin ve Çıkarım İçin Zemin}
+\end{frame}
+
+
+\begin{frame}[allowframebreaks]
+  \frametitle{Kaynaklar}
+  \nocite{walpole_ch4}
+  \printbibliography{}
+\end{frame}
+
+\appendix
+
+\section{Yapay Zeka Asistanı}
+\begin{frame}{Yapay Zeka Asistanınız: NotebookLM}
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \justifying{}
+            \textbf{Ders Materyalleri ile Etkileşime Geçin!}
+
+            Bu dersin tüm içeriği (sunumlar, makaleler ve notlar), Google'ın gelişmiş yapay zeka asistanı \textbf{NotebookLM} sistemine yüklenmiştir.
+
+            \vspace{1em}
+            \begin{itemize}
+                \item \textbf{Anında Cevaplar:} Aklınıza takılanları sorun.
+                \item \textbf{Özetler:} Karmaşık konuları basitçe öğrenin.
+                \item \textbf{Audio Overview:} Dersi bir podcast gibi dinleyin.
+            \end{itemize}
+
+            \vspace{1.5em}
+            \begin{center}
+                {\setbeamercolor{button}{bg=red,fg=black}
+                \href{https://notebooklm.google.com/notebook/1daaa713-b9d0-4bb3-bbe6-defbaf4e67d4}{\beamerbutton{\rule[-4ex]{0pt}{11ex}\Large \textbf{Hemen Deneyin}}}}
+            \end{center}
+        \end{column}
+
+        \begin{column}{0.48\textwidth}
+            \centering
+            \includegraphics[width=\textwidth, height=0.6\textheight, keepaspectratio]{figures/notebooklm.jpg}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[plain,noframenumbering]
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=center, at=(current page.center), inner sep=0pt] {
+            \includegraphics[width=\paperwidth, height=\paperheight]{figures/combined_qrs.png}
+        };
+        \node[anchor=south, at=(current page.south), yshift=0.5cm, fill=white!95, rounded corners, inner sep=10pt, text width=0.95\paperwidth, align=center] {
+            \Large \textbf{\textcolor{blue}{Bizi Takip Edin!}} \\
+            \vspace{0.3em}
+            \small Ders tekrarlarıyla konuları pekiştirmek (YouTube), profesyonel proje ağlarına katılmak (LinkedIn) ve kampüs duyurularından anında haberdar olmak (Instagram) için topluluğumuza katılın.
+        };
+    \end{tikzpicture}
+\end{frame}
+\end{document}

@@ -1,0 +1,44 @@
+% ===================================================================
+% SKILL: İNTERAKTİF TEST VE CEVAP GİZLEME (OVERLAY)
+% ===================================================================
+% TANIM:
+% Bu şablon, ders sırasında öğrencilere soru sorup, cevabı bir sonraki
+% tıkla ekrana getirmek (animasyon/overlay) için kullanılır.
+% 
+% TEMEL MEKANİZMA:
+% \only<n->{...} komutu kullanılır. 
+% - n: Slaytın kaçıncı adımında görüneceğini belirtir.
+% - ->: O adımdan itibaren görünür kalacağını belirtir.
+% 
+% ÖRNEK SENARYO:
+% 1. Adım: Sadece sorular görünür.
+% 2. Adım: İlk sorunun cevabı belirir.
+% 3. Adım: İkinci sorunun cevabı belirir...
+% ===================================================================
+
+\begin{frame}{Hızlı Test: [Test Konusu Buraya]}
+    \justifying{}
+    Aşağıdaki soruları cevaplayalım:
+
+    \vspace{1em}
+    \begin{enumerate}
+        % SORU 1: Cevap 2. tıkta gelir (<2->)
+        \item \textbf{Soru Metni 1:} \only<2->{\textcolor{red}{\textbf{Cevap 1}}}
+        
+        % SORU 2: Cevap 3. tıkta gelir (<3->)
+        \item \textbf{Soru Metni 2:} \only<3->{\textcolor{red}{\textbf{Cevap 2}}}
+        
+        % SORU 3: Cevap 4. tıkta gelir (<4->)
+        \item \textbf{Soru Metni 3:} \only<4->{\textcolor{red}{\textbf{Cevap 3}}}
+        
+        % SORU 4: Cevap 5. tıkta gelir (<5->)
+        \item \textbf{Soru Metni 4:} \only<5->{\textcolor{red}{\textbf{Cevap 4}}}
+        
+        % SORU 5: Cevap 6. tıkta gelir (<6->)
+        \item \textbf{Soru Metni 5:} \only<6->{\textcolor{red}{\textbf{Cevap 5}}}
+    \end{enumerate}
+
+    \vspace{1.5em}
+    \centering
+    \textit{\small \textbf{İpucu:} Soruları okuduktan sonra cevabı tahmin etmeleri için öğrencilere süre tanıyın.}
+\end{frame}

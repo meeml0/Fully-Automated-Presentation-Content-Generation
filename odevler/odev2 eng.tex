@@ -1,0 +1,429 @@
+﻿% !TeX program = xelatex
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{fontspec}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[skins,breakable]{tcolorbox}
+\usepackage{tikz}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\graphicspath{{ocr_assets/markers/}{odevler/ocr_assets/markers/}}
+\setlength{\headheight}{24pt}
+\setmainfont{Latin Modern Roman}
+
+\geometry{left=12mm, right=12mm, top=2.5cm, bottom=2.5cm}
+
+% ── OCR Köşe (L) İşaretleri ──────────────────────────────────────
+\newcommand{\ocrMarkerInset}{12mm}
+\newcommand{\ocrMarkerSize}{14mm}
+\newcommand{\ocrCornerLen}{12mm}
+\newcommand{\ocrPageTopShift}{-0.5cm}
+\newcommand{\ocrMainBoxHeight}{24.2cm}
+\newcommand{\ocrSplitGap}{0.15cm}
+
+% OCR reference anchors (printer-safe inset + ArUco fiducials)
+\fancypagestyle{ocrpage}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    \fancyhead[L]{}
+    \fancyhead[R]{}
+    \fancyfoot[C]{\textbf{\sffamily Page \thepage}}
+    \fancyhead[C]{%
+        \begin{tikzpicture}[remember picture,overlay]
+            \draw[line width=2.2pt] (current page.north west) ++(\ocrMarkerInset,-\ocrMarkerInset) -- ++(\ocrCornerLen,0);
+            \draw[line width=2.2pt] (current page.north west) ++(\ocrMarkerInset,-\ocrMarkerInset) -- ++(0,-\ocrCornerLen);
+            \draw[line width=2.2pt] (current page.north east) ++(-\ocrMarkerInset,-\ocrMarkerInset) -- ++(-\ocrCornerLen,0);
+            \draw[line width=2.2pt] (current page.north east) ++(-\ocrMarkerInset,-\ocrMarkerInset) -- ++(0,-\ocrCornerLen);
+            \draw[line width=2.2pt] (current page.south west) ++(\ocrMarkerInset,\ocrMarkerInset) -- ++(\ocrCornerLen,0);
+            \draw[line width=2.2pt] (current page.south west) ++(\ocrMarkerInset,\ocrMarkerInset) -- ++(0,\ocrCornerLen);
+            \draw[line width=2.2pt] (current page.south east) ++(-\ocrMarkerInset,\ocrMarkerInset) -- ++(-\ocrCornerLen,0);
+            \draw[line width=2.2pt] (current page.south east) ++(-\ocrMarkerInset,\ocrMarkerInset) -- ++(0,\ocrCornerLen);
+
+            \node[anchor=north west,inner sep=0pt,xshift=\ocrMarkerInset,yshift=-\ocrMarkerInset] at (current page.north west)
+                {\includegraphics[width=\ocrMarkerSize]{aruco_00.png}};
+            \node[anchor=north east,inner sep=0pt,xshift=-\ocrMarkerInset,yshift=-\ocrMarkerInset] at (current page.north east)
+                {\includegraphics[width=\ocrMarkerSize]{aruco_01.png}};
+            \node[anchor=south east,inner sep=0pt,xshift=-\ocrMarkerInset,yshift=\ocrMarkerInset] at (current page.south east)
+                {\includegraphics[width=\ocrMarkerSize]{aruco_02.png}};
+            \node[anchor=south west,inner sep=0pt,xshift=\ocrMarkerInset,yshift=\ocrMarkerInset] at (current page.south west)
+                {\includegraphics[width=\ocrMarkerSize]{aruco_03.png}};
+
+            \node[anchor=north west,inner sep=0pt,xshift=38mm,yshift=-18mm] at (current page.north west)
+                {\textbf{\sffamily MAT204 HOMEWORK2}};
+            \node[anchor=north east,inner sep=0pt,xshift=-38mm,yshift=-18mm] at (current page.north east)
+                {\textbf{\sffamily STUDENT ID: \underline{\hspace{3cm}}}};
+        \end{tikzpicture}%
+    }
+}
+% ── OCR Kutu Stilleri ────────────────────────────────────────────
+\makeatletter
+\tcbset{
+    ocrbox/.style={
+        enhanced,
+        colback=white,
+        colframe=black,
+        boxrule=1.5pt,
+        arc=0pt,
+        outer arc=0pt,
+        left=2mm, right=2mm, top=4mm, bottom=2mm,
+        fonttitle=\bfseries\large,
+        coltitle=black,
+        attach boxed title to top left={yshift=3mm, xshift=0mm},
+        boxed title style={empty, size=minimal, bottom=0pt, top=0pt, left=0pt, right=0pt},
+        after skip=12pt,
+        underlay={
+            \begin{tcbclipinterior}
+                \draw[gray!40, thin, dashed, ystep=1cm, xstep=20cm] (interior.south west) grid (interior.north east);
+            \end{tcbclipinterior}
+        }
+    },
+    ocrboxsplit/.style={
+        sidebyside,
+        sidebyside align=top seam,
+        sidebyside gap=4mm,
+        lefthand ratio=0.44,
+        segmentation style={solid, black, line width=1.5pt},
+        enhanced,
+        colback=white,
+        colframe=black,
+        boxrule=1.5pt,
+        arc=0pt,
+        outer arc=0pt,
+        left=2mm, right=2mm, top=4mm, bottom=2mm,
+        fonttitle=\bfseries\large,
+        coltitle=black,
+        attach boxed title to top left={yshift=3mm, xshift=0mm},
+        boxed title style={empty, size=minimal, bottom=0pt, top=0pt, left=0pt, right=0pt},
+        after skip=12pt,
+        underlay={
+            \begin{tcbclipinterior}
+                \iftcb@sidebyside
+                    \clip (segmentation.south) rectangle (interior.north east);
+                \else
+                    \clip (interior.south west) rectangle (segmentation.east);
+                \fi
+                \draw[gray!40, thin, dashed, ystep=1cm, xstep=20cm] (interior.south west) grid (interior.north east);
+            \end{tcbclipinterior}
+        }
+    },
+    ocrresultbox/.style={
+        enhanced,
+        nobeforeafter,
+        colback=white,
+        colframe=black,
+        boxrule=1pt,
+        arc=0pt,
+        left=1mm, right=1mm, top=1mm, bottom=1mm,
+        height=1.5cm,
+        width=0.25\textwidth,
+        fonttitle=\bfseries\sffamily\small,
+        coltitle=black
+    }
+}
+\makeatother
+
+\newcommand{\ocrTopSectionLabel}[1]{%
+    \vspace*{-0.2cm}%
+    \noindent\textbf{\sffamily #1}\\[-1cm]%
+}
+
+\newcommand{\ocrInnerSectionLabel}[1]{%
+    \vspace*{-0.4cm}%
+    \noindent\textbf{\sffamily #1}\\[0.2cm]%
+}
+
+\newcommand{\ocrTopResultBox}[1]{%
+    \par\noindent\hfill%
+    \begin{minipage}{0.25\textwidth}%
+    \begin{tcolorbox}[enhanced, nobeforeafter, colback=white, colframe=black, boxrule=1pt, arc=0pt,%
+        left=1mm, right=1mm, top=1mm, bottom=1mm, height=1.5cm, width=\linewidth,%
+        title={#1:}, fonttitle=\bfseries\sffamily\small, coltitle=black, colbacktitle=white]%
+    \end{tcolorbox}%
+    \end{minipage}%
+}
+
+\newcommand{\ocrInnerResultBox}[1]{%
+    \par\noindent\hfill%
+    \begin{minipage}{0.25\textwidth}%
+    \begin{tcolorbox}[enhanced, nobeforeafter, colback=white, colframe=black, boxrule=1pt, arc=0pt,%
+        left=1mm, right=1mm, top=2mm, bottom=1mm, height=1.5cm, width=\linewidth,%
+        title={#1:}, fonttitle=\bfseries\sffamily\small, coltitle=black, colbacktitle=white]%
+    \end{tcolorbox}%
+    \end{minipage}%
+}
+
+\newcommand{\ocrDivider}{%
+    \vspace{\ocrSplitGap}%
+    \noindent\rule{\linewidth}{1.2pt}%
+    \vspace{\ocrSplitGap}%
+}
+
+\definecolor{TitleColor}{HTML}{0B3C5D}
+\definecolor{QuestionColor}{HTML}{0D3B66}
+\definecolor{ChoiceColor}{HTML}{8A2D12}
+
+\renewcommand{\labelenumi}{\textbf{\color{QuestionColor}\arabic{enumi}.}}
+\renewcommand{\labelenumii}{\textbf{\color{ChoiceColor}(\alph{enumii})}}
+
+\setlist[enumerate,1]{leftmargin=*,font=\bfseries\color{QuestionColor}}
+\setlist[enumerate,2]{leftmargin=1.2cm,font=\bfseries\color{ChoiceColor}}
+\setlist[itemize]{leftmargin=1.2cm,font=\bfseries\color{ChoiceColor},label=\textbf{\color{ChoiceColor}$\blacktriangleright$}}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+
+    
+    {\Huge \textbf{\color{TitleColor}Probability and Statistics for Engineers MAT204}}\\[0.5cm]
+    
+    {\Large \textbf{HOMEWORK - 2}}\\[1cm]
+    
+    \colorbox{yellow}{\large \textbf{DUE DATE:} 10.03.2026 -- 20.03.2026}\\[1cm]
+\end{center}
+    
+\noindent\colorbox{yellow!30}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+        \textbf{WRITING RULES:}\\[0.2cm]
+        -- Write your answers cleanly and legibly in your own handwriting.\\
+        -- Please write your solutions only inside the designated boxes for each question and do not go out of bounds.\\
+        -- You must draw diagrams, charts, and similar illustrations in the specific areas allocated for these tasks.\\[0.1cm]
+        \colorbox{red!15}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{-- When printing the page, make sure you \textbf{do not} use the ``fit to page'' option, or ensure that \textbf{the optical markers are printed completely on the paper}.}}
+    }%
+}
+\vspace{0.5cm}
+    
+\begin{flushleft}
+    \large
+    \textbf{Instructor's Name-Surname:} \hrulefill{} \\[0.4cm]
+    \textbf{Course Section:} \hrulefill{} \\[0.4cm]
+    \textbf{Date:} \hrulefill{} \\[0.4cm]
+    \textbf{Student ID:} \hrulefill{} \\[0.4cm]
+    \textbf{Student's Name-Surname:} \hrulefill{} \\[1cm]
+\end{flushleft}
+    
+\begin{center}
+    \large
+    \textit{I declare that I have written this assignment myself.}\\[1cm]
+    \textbf{Signature: \rule{4cm}{0.4pt}}
+\end{center}
+
+\vspace{0.5cm}
+\noindent\colorbox{yellow}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+        \textbf{Homework Submission Rules:}\\
+        It must be handed in during the first lecture day of the week in class or by the end of working hours on the same day, and must also be uploaded to the LMS by the same date. Submissions not handed in physically or not visible on the LMS will be considered invalid. The cover page is mandatory. Please staple your homework. Do not put it in a transparent folder.
+    }%
+}
+    
+\end{titlepage}
+
+\newpage
+
+\section*{\textbf{\color{TitleColor}Questions}}
+
+\noindent\colorbox{yellow!40}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+        \textbf{ATTENTION:} Please write all solutions, calculations, and any drawings (such as Tree Diagrams, Venn Diagrams, Circuit Diagrams, etc.) for the following questions inside the black boxes with the corresponding \textbf{Question Number} on the provided \textbf{Optical Mark Recognition (OCR) Answer Sheet}. When a diagram or drawing is needed, use the sections specifically allocated for these in the headers of the OCR boxes ({\color{ChoiceColor}e.g., Venn Diagram Drawing Area}). Answers written on the back of this PDF or in blank margins will not be evaluated.
+    }%
+}
+\vspace{0.5cm}
+
+\begin{enumerate}
+
+
+
+\item \textbf{(Expected Value)} In a game of chance, two dice are rolled. If at least one die shows a $4$ or the sum of the two dice is $7$, the player wins $5$~TL; otherwise, they lose $3$~TL.
+\begin{enumerate}
+\item What is the expected winning/loss for a single game?
+\item If we pay $30$~TL before playing the game $10$ times, what is the expected total net winning?
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\item \textbf{(Discrete Random Variable)} The grade received on a geography assignment is a random variable $X$. The probabilities are as follows:
+\[
+P(A)=0.18,\quad 
+P(B)=0.32,\quad 
+P(C)=0.25,\quad 
+P(D)=0.07,\quad 
+P(E)=0.03,\quad 
+P(F)=0.15
+\]
+\begin{enumerate}
+\item Show the cumulative distribution function (CDF) of $X$ in a table format.
+\item Calculate the probability of receiving a grade higher than B.
+\item Calculate the probability of receiving a grade lower than C.
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\item \textbf{(Bayes' Theorem)} In a factory, there are 3 machines producing the same product: $M_1$, $M_2$, and $M_3$. Their production shares are:
+\[
+P(M_1)=0.50,\qquad
+P(M_2)=0.30,\qquad
+P(M_3)=0.20
+\]
+The probability of defective production for each machine is:
+\[
+P(H\mid M_1)=0.01,\qquad
+P(H\mid M_2)=0.03,\qquad
+P(H\mid M_3)=0.02
+\]
+A randomly selected product is found to be defective ($H$). What is the probability that this product came from machine $M_2$, $P(M_2\mid H)$?
+
+\newpage
+
+\item \textbf{(Continuous Random Variable)} The probability density function for the continuous random variable $X$ is given as follows:
+\[
+f(x)=
+\begin{cases}
+c(x+1), & 1<x<3 \\
+0, & \text{otherwise}
+\end{cases}
+\]
+\begin{enumerate}
+\item Find the value of the constant $c$ for $f(x)$ to be a valid probability density function.
+\item Find the corresponding cumulative distribution function $F(x)$.
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\item \textbf{(Conditional Probability and Bayes)} In a certain region of the country, it is known from past experience that the probability of encountering an adult over the age of $40$ with cancer is $0.05$. If,
+\[
+P(\text{True positive}) = 0.78
+\]
+and
+\[
+P(\text{False positive}) = 0.06
+\]
+then, what is the probability that an adult over $40$ \textbf{who is diagnosed with cancer actually has cancer}?
+\end{enumerate}
+
+% ════════════════════════════════════════════════════════════════
+%  OCR CEVAP KAĞIDI
+% ════════════════════════════════════════════════════════════════
+\newpage
+\pagestyle{ocrpage}
+\vspace*{\ocrPageTopShift}
+
+
+
+
+% ═══════════════════════════════════════════════════════════
+% SAYFA 1 (OCR): Soru 1a — Ağaç Diyagramı + Çözüm
+% ═══════════════════════════════════════════════════════════
+\begin{tcolorbox}[ocrbox, height=\ocrMainBoxHeight]
+\begin{minipage}[t][11cm][t]{\textwidth}
+\ocrTopSectionLabel{ANSWER-1A}
+\vfill
+\ocrTopResultBox{RESULT 1A}
+\end{minipage}
+
+\ocrDivider
+
+\begin{minipage}[t][11cm][t]{\textwidth}
+\ocrInnerSectionLabel{ANSWER-1B}
+\vfill
+\ocrInnerResultBox{RESULT 1B}
+\end{minipage}
+\end{tcolorbox}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════
+% SAYFA 2 (OCR): Soru 2 — a) CDF Tablosu  + b) ve c) hesap
+% ═══════════════════════════════════════════════════════════
+\begin{tcolorbox}[ocrbox, height=\ocrMainBoxHeight]
+\begin{minipage}[t][8.4cm][t]{\textwidth}
+\vspace*{0.15cm}
+\ocrTopSectionLabel{ANSWER-2A}
+\vfill
+\ocrTopResultBox{RESULT 2A}
+\end{minipage}
+
+\ocrDivider
+
+\begin{minipage}[t][6.55cm][t]{\textwidth}
+\ocrInnerSectionLabel{ANSWER-2B}
+\vfill
+\ocrInnerResultBox{RESULT 2B}
+\end{minipage}
+
+\ocrDivider
+
+\begin{minipage}[t][6.55cm][t]{\textwidth}
+\ocrInnerSectionLabel{ANSWER-2C}
+\vfill
+\ocrInnerResultBox{RESULT 2C}
+\end{minipage}
+\end{tcolorbox}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════
+% SAYFA 3 (OCR): Soru 3 — Ağaç Diyagramı + Bayes Hesabı
+% ═══════════════════════════════════════════════════════════
+\begin{tcolorbox}[ocrbox, height=\ocrMainBoxHeight]
+\begin{minipage}[t][11cm][t]{\textwidth}
+\ocrTopSectionLabel{ANSWER-3 DIAGRAM}
+\vfill
+\end{minipage}
+
+\ocrDivider
+
+\begin{minipage}[t][11cm][t]{\textwidth}
+\ocrInnerSectionLabel{ANSWER-3 SOLUTION}
+\vfill
+\ocrInnerResultBox{RESULT 3}
+\end{minipage}
+\end{tcolorbox}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════
+% SAYFA 4 (OCR): Soru 4a — c sabiti  + Soru 4b — F(x)
+% ═══════════════════════════════════════════════════════════
+\begin{tcolorbox}[ocrbox, height=\ocrMainBoxHeight]
+\begin{minipage}[t][11cm][t]{\textwidth}
+\ocrTopSectionLabel{ANSWER-4A}
+\vfill
+\ocrTopResultBox{RESULT 4A}
+\end{minipage}
+
+\ocrDivider
+
+\begin{minipage}[t][11cm][t]{\textwidth}
+\ocrInnerSectionLabel{ANSWER-4B}
+\vfill
+\ocrInnerResultBox{RESULT 4B}
+\end{minipage}
+\end{tcolorbox}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════
+% SAYFA 5 (OCR): Soru 5 — Ağaç Diyagramı + Bayes
+% ═══════════════════════════════════════════════════════════
+\begin{tcolorbox}[ocrbox, height=\ocrMainBoxHeight]
+\begin{minipage}[t][11cm][t]{\textwidth}
+\ocrTopSectionLabel{ANSWER-5 DIAGRAM}
+\vfill
+\end{minipage}
+
+\ocrDivider
+
+\begin{minipage}[t][11cm][t]{\textwidth}
+\ocrInnerSectionLabel{ANSWER-5 SOLUTION}
+\vfill
+\ocrInnerResultBox{RESULT 5}
+\end{minipage}
+\end{tcolorbox}
+
+\end{document}

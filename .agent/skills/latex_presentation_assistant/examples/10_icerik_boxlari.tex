@@ -1,0 +1,70 @@
+% ===================================================================
+% SKILL: İÇERİK KUTULARI (BOXES) STANDARDI
+% ===================================================================
+% TANIM:
+% Sunumda içeriğin türüne göre (Matematik, Uyarı, Örnek, Kod) doğru 
+% kutu (block) yapısını kullanmak, öğrencinin algısını yönetir.
+% 
+% KURALLAR:
+% 1. Matematik/Tanım -> Standart Mavi Blok (block)
+% 2. Kritik/Uyarı    -> Kırmızı Blok (alertblock)
+% 3. Örnek/Senaryo   -> Yeşil Blok (exampleblock)
+% 4. Kod/Uzun Metin  -> Font küçültülmüş Blok (Taşmayı önlemek için)
+% ===================================================================
+
+\begin{frame}{İçerik Kutuları Örnekleri}
+
+    % 1. MATEMATİK VE TEORİ (STANDART MAVİ BLOK)
+    % Tanımlar, teoremler, formüller ve temel kavramlar için.
+    \begin{block}{Tanım: Olasılık Yoğunluk Fonksiyonu}
+        Bir sürekli rassal değişkenin belirli bir aralıkta değer alma olasılığını veren fonksiyondur.
+        \[ P(a \le X \le b) = \int_{a}^{b} f(x) \,dx \]
+    \end{block}
+
+    \vspace{1em}
+
+    % 2. KRİTİK UYARI (KIRMIZI ALERT BLOK)
+    % Hatalar, dikkat edilmesi gerekenler, istisnalar için.
+    \begin{alertblock}{Kritik Hata: Korelasyon vs Nedensellik}
+        Korelasyonun yüksek olması ($r \approx 1$), bir değişkenin diğerinin \textbf{sebebi} olduğu anlamına gelmez! Bu ``Spurious Correlation'' tuzağıdır.
+    \end{alertblock}
+
+    \vspace{1em}
+
+    % 3. ÖRNEK VE UYGULAMA (YEŞİL EXAMPLE BLOK)
+    % Senaryolar, vaka analizleri ve pratik örnekler için.
+    \begin{exampleblock}{Örnek Senaryo: Üretim Hattı}
+        Bir fabrikada üretilen vidaların \%2'si kusurludur. Rastgele seçilen 100 vidadan en az 3 tanesinin kusurlu olma olasılığı nedir?
+    \end{exampleblock}
+
+\end{frame}
+
+% 4. KOD BLOĞU (TAŞMA KORUMALI)
+% Kodlar genellikle uzundur ve taşar. Mutlaka font küçültülmelidir.
+% [fragile] parametresi kod bloğu içeren frame için ZORUNLUDUR.
+\begin{frame}[fragile]{Kod Bloğu Örneği}
+    
+    \begin{block}{Python: Veri Analizi Kodu}
+        % Font boyutu \small, \footnotesize veya \scriptsize olarak ayarlanır.
+        % Bu sayede kodlar kutunun dışına taşmaz.
+        \footnotesize 
+        \begin{verbatim}
+import pandas as pd
+import numpy as np
+
+# Veri setini yükle ve özetle
+df = pd.read_csv('data.csv')
+
+# Eksik verileri kontrol et (Kritik Adım)
+if df.isnull().sum() > 0:
+    print("Uyarı: Eksik veri bulundu!")
+    df.dropna(inplace=True)
+
+print(df.describe())
+        \end{verbatim}
+    \end{block}
+    
+    \vspace{0.5em}
+    \centering
+    \textit{\scriptsize Not: Kod bloklarında fontu küçültmek (footnotesize) taşmayı önler.}
+\end{frame}
