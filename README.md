@@ -1,2 +1,2 @@
-# Ostim Teknik Universitesi Yazilim Muhendisligi egitim icerigi hazirlama
+# Nitelikli Sunum ve Dokümantasyon Hazırlama
 Lutbeamer skilli rules lu sunum hazırlama seti
